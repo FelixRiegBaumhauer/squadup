@@ -1,2 +1,3 @@
-felixR -- 2017-01-05 11:30-- created the repo housing our design document, and along with other group members, finalized our design doc
-kathyL -- 2017-01-07 13:55-- added boostrap, tested design of index and home page
+felixR -- 2017-01-05 11:30--created the repo housing our design document, and along with other group members, finalized our design doc
+kathyL -- 2017-01-07 13:55--added boostrap, tested design of index and home page
+felixR -- 2017-01-07 18:25--created the framework for the project: allows for the creation of accounts, logging in. Still needs significant refinement, there needs to be a way to create and assign id numbers. Additional issues: ocasionally pipes break, this is sporadic and I will look into it. 
