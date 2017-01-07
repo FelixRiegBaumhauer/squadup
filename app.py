@@ -10,11 +10,13 @@ app = Flask(__name__)
 app.secret_key = 'seizetheday' #maybe this os.urandom(32)
 secret=""
 
-@app.route('/')
+@app.route("/")
 def main():
     if(secret in session):
         return render_template('main.html')
     return render_template("login.html")
+
+
 
 
 @app.route("/login", methods=["POST"])
@@ -35,15 +37,26 @@ def verify_login():
     return render_template('login.html')
 
 
+
+
 @app.route("/logout")
 def log_user_out():
+    print session
     session.pop(secret)
-    return redirect(url_for('main'))
+    #return redirect(url_for('main'))
+    return render_template("login.html")##THIS IS A QUICK FIX
+##THIS SHOULD BE FIXED IN THE FUTURE
+
+
+
 
 
 @app.route("/signup_page")
 def present_signup():
     return render_template('signup.html')
+
+
+
 
 
 @app.route("/signup", methods=["POST"])
@@ -59,7 +72,6 @@ def verify_signup():
     hashPassObj = hashlib.sha1()
     hashPassObj.update(given_pass2)
     hashed_pass2 = hashPassObj.hexdigest()
-    
     
     permission = utils.auth.make_account(given_user, hashed_pass1, hashed_pass2)
     
@@ -79,6 +91,7 @@ def main():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    debug=True
+    app.run()
     #app.run()
     #app.run('127.0.0.1', port=5000)
