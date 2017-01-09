@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    {{username}}
-  </head>
-  <body>
+{% extends "main.html" %}
+
+{% block content %}
+
     <form action="/schedule">
 	<input type="text" name="pd1" value="">
 	<br>
@@ -27,6 +25,5 @@
 	<br><br>
 	<input type="submit" value="Submit">
     </form>
-  </body>
-</html>
-	
+
+{% endblock %}

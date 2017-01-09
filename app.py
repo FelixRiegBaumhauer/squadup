@@ -29,11 +29,11 @@ def verify_login():
     hashed_pass = hashPassObj.hexdigest()
 
     permission = utils.auth.login(given_user, hashed_pass)
-    
+
     if(permission == True):
         session[secret]=given_user
         return redirect(url_for('main'))
-    
+
     return render_template('login.html')
 
 
@@ -64,7 +64,7 @@ def verify_signup():
     given_user = request.form["username"]
     given_pass1 = request.form["password1"]
     given_pass2 = request.form["password2"]
-    
+
     hashPassObj = hashlib.sha1()
     hashPassObj.update(given_pass1)
     hashed_pass1 = hashPassObj.hexdigest()
@@ -72,12 +72,12 @@ def verify_signup():
     hashPassObj = hashlib.sha1()
     hashPassObj.update(given_pass2)
     hashed_pass2 = hashPassObj.hexdigest()
-    
+
     permission = utils.auth.make_account(given_user, hashed_pass1, hashed_pass2)
-    
+
     if(permission == True):
         return redirect(url_for('main'))
-    
+
     return redirect(url_for('present_signup'))
 
 @app.route('/profile')
@@ -90,7 +90,7 @@ def inputeSchedule():
     x=0
     while(x<10):
         schdl[x]=request.form[str(x+1)]
-        x++
+        x+=1
     createSchedule()
     return redirect(url_for('main'))
 
@@ -98,7 +98,7 @@ def inputeSchedule():
 @app.route('/main')
 def main():
     return render_template("main.html")
-'''    
+'''
 
 
 
