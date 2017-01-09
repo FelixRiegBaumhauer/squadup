@@ -1,4 +1,15 @@
+Seize the Day
+SquadUp DEVLOG
+
 felixR -- 2017-01-05 11:30--created the repo housing our design document, and along with other group members, finalized our design doc
+
 kathyL -- 2017-01-07 13:55--added bootstrap, tested design of index and home page
-felixR -- 2017-01-07 18:25--created the framework for the project: allows for the creation of accounts, logging in. Still needs significant refinement, there needs to be a way to create and assign id numbers. Additional issues: ocasionally pipes break, this is sporadic and I will look into it.
+
+felixR -- 2017-01-07 18:25--created the framework for the project: allows for th
+e creation of accounts, logging in. Still needs significant refinement, there needs to be a way to create and assign id numbers. Additional issues: ocasionally pipes break, this is sporadic and I will look into it.
+
 kathyL -- 2017-01-07 22:05--added the autofill in for updating location, tested converting image to text successfully --> located on my own repo for now. considering using google vision api
+
+gioT -- 2017-01-09 07:23--added code to make new user id for each new user, created basic profile template, created the basic architecture for uploading one's schedule in app.py
+
+gioT -- 2017-01-09 13:43--fixed bug that occured when assigning new users a user id, tested, also fixed bug that occured when first user trying to register

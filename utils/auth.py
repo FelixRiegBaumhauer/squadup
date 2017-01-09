@@ -62,9 +62,10 @@ def make_account(g_username, g_password1, g_password2):
     c.execute('SELECT id from users;');
     hold=c.fetchall()
 
-    print hold[0][0]
-    
-    c.execute('INSERT INTO users VALUES('+str(hold[len(hold)-1][0]+1)+',"'+g_username+'"'+','+'"'+g_password1+'"'+', "", "", "");')
+    if(len(hold)==0):
+        c.execute('INSERT INTO users VALUES(0,"'+g_username+'"'+','+'"'+g_password1+'"'+', "", "");')
+    else:
+        c.execute('INSERT INTO users VALUES('+str(hold[len(hold)-1][0]+1)+',"'+g_username+'"'+','+'"'+g_password1+'"'+', "", "");')
 
     #===============CLOSE
     db.commit()
