@@ -90,7 +90,7 @@ def inputeSchedule():
     x=0
     while(x<10):
         schdl[x]=request.form[str(x+1)]
-        x++
+        x+=1
     createSchedule()
     return redirect(url_for('main'))
 
