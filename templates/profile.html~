@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {{username}}
+  </head>
+  <body>
+    <form action="schedule.html">
+	<input type="text" name="pd1" value="">
+	<br>
+	<input type="text" name="pd2" value="">
+	<br>
+	<input type="text" name="pd3" value="">
+	<br>
+	<input type="text" name="pd4" value="">
+	<br>
+	<input type="text" name="pd5" value="">
+	<br>
+	<input type="text" name="pd6" value="">
+	<br>
+	<input type="text" name="pd7" value="">
+	<br>
+	<input type="text" name="pd8" value="">
+	<br>
+	<input type="text" name="pd9" value="">
+	<br>
+	<input type="text" name="pd10" value="">
+	<br><br>
+	<input type="submit" value="Submit">
+	

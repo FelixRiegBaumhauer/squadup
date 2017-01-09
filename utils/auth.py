@@ -59,8 +59,12 @@ def make_account(g_username, g_password1, g_password2):
     db = sqlite3.connect(f);
     c = db.cursor()
     #===============
+    c.execute('SELECT id from users;');
+    hold=c.fetchall()
+
+    print hold[0]
     
-    c.execute('INSERT INTO users VALUES(0,'+'"'+g_username+'"'+','+'"'+g_password1+'"'+', "", "", "");')
+    c.execute('INSERT INTO users VALUES('+str(hold[0][len(hold[0])-1]+1)+',"'+g_username+'"'+','+'"'+g_password1+'"'+', "", "", "");')
 
     #===============CLOSE
     db.commit()

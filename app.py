@@ -80,7 +80,19 @@ def verify_signup():
     
     return redirect(url_for('present_signup'))
 
+@app.route('/profile')
+def dispProfile():
+    return render_template("profile.html", username=session[secret])
 
+@app.route('/schedule', methods=['POST'])
+def inputeSchedule():
+    schdl=[' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
+    x=0
+    while(x<10):
+        schdl[x]=request.form[str(x+1)]
+        x++
+    createSchedule()
+    return redirect(url_for('main'))
 
 '''
 @app.route('/main')
