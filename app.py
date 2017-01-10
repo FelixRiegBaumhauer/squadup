@@ -96,7 +96,7 @@ def inputSchedule():
     schdl=[' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
     x=0
     while(x<10):
-        schdl[x]=request.form[str(x+1)]
+        schdl[x]=request.form["pd"+str(x+1)]
         x+=1
     utils.schedule.createSchedule(schdl,session[secret])
     return redirect(url_for('main'))
