@@ -4,7 +4,7 @@ def createSchedule(schedule, userID):
     db=sqlite3.connect("data/users.db")
     c=db.cursor()
 
-    c.execute('INSERT INTO schedule VALUES("'+userID+'", "'+str(schedule[0])+'", "'+str(schedule[1])+'", "'+str(schedule[2])+'", "'+str(schedule[3])+'", "'+str(schedule[4])+'", "'+str(schedule[5])+'", "'+str(schedule[6])+'", "'+str(schedule[7])+'", "'+str(schedule[8])+'", "'+str(schedule[9])+'");')
+    c.execute('INSERT INTO schedule VALUES("'+userID+'", "'+schedule[0]+'", "'+schedule[1]+'", "'+schedule[2]+'", "'+schedule[3]+'", "'+schedule[4]+'", "'+schedule[5]+'", "'+schedule[6]+'", "'+schedule[7]+'", "'+schedule[8]+'", "'+schedule[9]+'");')
 
     db.commit()
     db.close()
