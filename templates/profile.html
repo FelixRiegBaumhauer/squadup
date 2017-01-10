@@ -2,8 +2,20 @@
 
 {% block content %}
 
-Post Your Schedule
 
+{% if show %}
+You Schedule
+<ul>
+{% for pd in sch[1:] %}
+    <li>{{ pd }}</li>
+{% endfor %}
+</ul>
+
+
+{% else %}
+
+
+Post Your Schedule
 <form action="/schedule" method="POST">
   Period 1 
   <input type="text" name="pd1" value="">
@@ -37,5 +49,18 @@ Post Your Schedule
   <br><br>
   <input type="submit" value="Submit">
 </form>
+{% endif %}
 
+<!--
+<form action="/upload" method="post" enctype="multipart/form-data"> ...
+<input type="file" name="file" id="file">
+<br>
+<br>
+<input type="submit" value="Upload Image" name="submit">
+</form>
+-->
+<br>
+<br>
+<br>
+<br>
 {% endblock %}

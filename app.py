@@ -2,7 +2,7 @@
 #(Sachal, Kathy, Felix, Gio)
 
 
-from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory
+from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash
 import json, os, urllib, hashlib, utils.auth, utils.schedule
 from werkzeug.utils import secure_filename
 
@@ -39,7 +39,7 @@ def verify_login():
 
     if(permission == True):
         session[secret]=given_user
-        return redirect(url_for('main'))
+        return redirect(url_for('main', username=session[secret]))
 
     return render_template('login.html')
 
@@ -89,7 +89,16 @@ def verify_signup():
 
 @app.route('/profile')
 def dispProfile():
-    return render_template("profile.html", username=session[secret])
+    sched = (utils.schedule.retSchedule(session[secret]))
+    L = []
+    if len(sched) != 0:
+        show=True
+        sched = sched[-1]
+        for a in sched:
+            L.append(a)
+    else:
+        show=False
+    return render_template("profile.html", username=session[secret], sch=L, show=show)
 
 @app.route('/schedule', methods=['POST'])
 def inputSchedule():
@@ -116,12 +125,11 @@ def uploaded_file(filename):
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method=='GET':
-        render_template('upload.html')
+        return render_template('upload.html')
     else:
         # check if the post request has the file part
         if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
+            return 'No file part'
         file = request.files['file']
         # if user does not select file, browser also
         # submit a empty part without filename
