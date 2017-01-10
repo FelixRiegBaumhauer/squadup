@@ -6,7 +6,7 @@ def createSchedule(schedule, userID):
     c.execute('SELECT userID from schedule')
 
     hold=c.fetchall()
-    for users in hold):
+    for users in hold:
         if(users[0]==userID):
             c.execute('DELETE FROM schedule WHERE userID=="'+userID+'";')
 

@@ -26,6 +26,8 @@ kathyL -- 2017-01-10 00:34--added a return most updated version of user schedule
 kathyL -- 2017-01-10 7:50--made app able to process 2 different forms by selection of button
 
 malickS -- --Created main database
-malickS -- --Wrote js functions for checkin which current period it is
-malickS -- --Wrote js functions that tell you what class you shoudl be in
+malickS -- --Wrote js functions for checking which current period it is
+malickS -- --Wrote js functions that tell you what class you should be in
 will add dates later
+
+kathyL -- 2017-01-10 17:23--made searching for other users work. if user is not in database, then msg will say that. display user's name on each schedule page. removed unnecessary text boxes
