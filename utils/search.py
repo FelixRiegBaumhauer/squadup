@@ -16,4 +16,3 @@ def searchUsers(query):
             L.append(users[0])
     return L
 
-searchUsers('us')
