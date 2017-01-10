@@ -18,3 +18,5 @@ kathyL -- 2017-01-09 13:13:59-- added uploading functions in app.py, created upl
 gioT -- 2017-01-09 19:35--wrote function to add schedule to schedule table, created schedule table in users.db, still have to debug
 
 felixR -- 2017-01-09 21:00--reconfigured the database, along with small aesthetic changes: i.e. the creation of user instructions and such.
+
+felixR  2017-01-09 21:35--Fixed the until then non working mechanism meant to pull entered schedules and place them in the database, nw users can enter their schedules, issue still remaining: users can continuslly add schedules, ie there is no restriction on auser claiming that they have 10 schedules
