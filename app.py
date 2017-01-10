@@ -3,7 +3,7 @@
 
 
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory
-import json, os, urllib, hashlib, utils.auth
+import json, os, urllib, hashlib, utils.auth, utils.schedule
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -98,7 +98,7 @@ def inputSchedule():
     while(x<10):
         schdl[x]=request.form[str(x+1)]
         x+=1
-    createSchedule(schdl,session['secret'])
+    utils.schedule.createSchedule(schdl,session[secret])
     return redirect(url_for('main'))
 
 
@@ -144,7 +144,7 @@ def main():
 
 
 if __name__ == '__main__':
-    debug=True
+    app.debug=True
     app.run()
     #app.run()
     #app.run('127.0.0.1', port=5000)
