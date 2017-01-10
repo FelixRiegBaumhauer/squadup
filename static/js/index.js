@@ -1,40 +1,40 @@
 //time is variable which represents current number of minutes since 12am
 function currentperiod(time) {
     if (time < 480) {
-        return "Before school";
+        return 0;
     }
     else if (time < 525) {
-        return "its first period";
+        return 1;
     }
     else if (time < 571) {
-        return "its second period";
+        return 2;
     }
     else if (time < 680) {
-        return "its third period";
+        return 3;
     }
     else if (time < 666) {
-        return "its 4th period";
+        return 4;
     }
     else if (time < 712) {
-        return "its 5th period";
+        return 5;
     }
     else if (time < 758) {
-        return "its 6th period";
+        return 6;
     }
     else if (time < 804) {
-        return "its 7th period";
+        return 7;
     }
     else if (time < 849) {
-        return "its 8th period";
+        return 8;
     }
     else if (time < 894) {
-        return "its 9th period";
+        return 9;
     }
     else if (time < 935) {
-        return "its 10th period";
+        return 10;
     }
     else {
-        return "its afterschool";
+        return 0;
     }
     
 }

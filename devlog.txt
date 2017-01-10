@@ -24,3 +24,8 @@ felixR  2017-01-09 21:35--Fixed the until then non working mechanism meant to pu
 kathyL -- 2017-01-10 00:34--added a return most updated version of user schedule in schedule.py to show in profile page. made upload button work--users now upload to static/images folder. also changed what gets display on profile page. if they already inputted a schedule, then schedule will show. if not, a form will show.
 
 kathyL -- 2017-01-10 7:50--made app able to process 2 different forms by selection of button
+
+malickS -- --Created main database
+malickS -- --Wrote js functions for checkin which current period it is
+malickS -- --Wrote js functions that tell you what class you shoudl be in
+will add dates later

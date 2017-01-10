@@ -2,6 +2,43 @@
 
 {% block content %}
 
+<script src = "/static/js/index.js"></script>
+<div id = "message"> Your current period is :<div id = "currentperiod">currrent period</div> </div>
+
+<br><br>
+<script>
+    
+    var curpd = currentperiod(sum_mins);
+    document.getElementById("currentperiod").innerHTML = curpd;
+    //alert("hello".concat("hi"));
+   
+    if (curpd === 1) {
+     document.getElementById("currentperiod").innerHTML = "{{ sch[1] }}";
+
+    }
+    else if (curpd === 2) {
+        document.getElementById("currentperiod").innerHTML = "{{ sch[2] }}";
+    }else if (curpd === 3) {
+        document.getElementById("currentperiod").innerHTML = "{{ sch[3] }}";
+    }else if (curpd === 4) {
+        document.getElementById("currentperiod").innerHTML = "{{ sch[4] }}";
+    }else if (curpd === 5) {
+        document.getElementById("currentperiod").innerHTML = "{{ sch[5] }}";
+    }else if (curpd === 6) {
+        document.getElementById("currentperiod").innerHTML = "{{ sch[6] }}";
+    }else if (curpd === 7) {
+        document.getElementById("currentperiod").innerHTML = "{{ sch[7] }}";
+    }else if (curpd === 8) {
+        document.getElementById("currentperiod").innerHTML = "{{ sch[8] }}";
+    }else if (curpd === 9) {
+        document.getElementById("currentperiod").innerHTML = "{{ sch[9] }}";
+    }else if (curpd === 10) {
+       document.getElementById("currentperiod").innerHTML = "{{ sch[10] }}";
+    }
+</script>
+
+{{ sch[1] }}
+
 
 
 {% if own %}
@@ -61,6 +98,8 @@ Post Your Schedule
   <input type="submit" value="Submit">
 </form>
 {% endif %}
+
+
 
 <!--
 <form action="/upload" method="post" enctype="multipart/form-data"> ...
