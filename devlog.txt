@@ -16,3 +16,5 @@ gioT -- 2017-01-09 13:43--fixed bug that occured when assigning new users a user
 kathyL -- 2017-01-09 13:13:59-- added uploading functions in app.py, created upload.html for testing ~~
 
 gioT -- 2017-01-09 19:35--wrote function to add schedule to schedule table, created schedule table in users.db, still have to debug
+
+felixR -- 2017-01-09 21:00--reconfigured the database, along with small aesthetic changes: i.e. the creation of user instructions and such.
