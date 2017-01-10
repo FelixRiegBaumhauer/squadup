@@ -3,7 +3,7 @@
 
 
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash
-import json, os, urllib, hashlib, utils.auth, utils.schedule
+import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -21,12 +21,15 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def main():
     if(secret in session):
         if request.method=="GET":
-            return render_template('main.html')
+            return render_template('main.html',username=session[secret])
         else:
             if request.form["submit"]=="post":
                 return "fxn to update current location"
-            else:
-                return "fxn to search"
+            if request.form["submit"]=="search":
+                #users = utils.search.searchUsers(request.form['search'])
+                q = request.form['search']
+                return redirect("/profile/" + q)
+                    
     return render_template("login.html")
 
 
@@ -45,7 +48,7 @@ def verify_login():
 
     if(permission == True):
         session[secret]=given_user
-        return redirect(url_for('main', username=session[secret]))
+        return redirect(url_for('main'))
 
     return render_template('login.html')
 
@@ -93,8 +96,12 @@ def verify_signup():
 
     return redirect(url_for('present_signup'))
 
-@app.route('/profile')
+@app.route('/profile', methods=['POST','GET'])
 def dispProfile():
+    if request.method=="POST":
+        if request.form["submit"]=="search":
+            q = request.form['search']
+            return redirect("/profile/" + q)
     sched = (utils.schedule.retSchedule(session[secret]))
     L = []
     if len(sched) != 0:
@@ -104,7 +111,26 @@ def dispProfile():
             L.append(a)
     else:
         show=False
-    return render_template("profile.html", username=session[secret], sch=L, show=show)
+    return render_template("profile.html", username=session[secret], sch=L, show=show, own=True, name=session[secret])
+
+@app.route('/profile/<query>', methods=['POST','GET'])
+def dispFriendProfile(query):
+    if len(utils.search.searchUsers(query))<1:
+                return 'User not found'
+    if request.method=="POST":
+        if request.form["submit"]=="search":
+            q = request.form['search']
+            return redirect("/profile/" + q)
+    sched = (utils.schedule.retSchedule(query))
+    L = []
+    if len(sched) != 0:
+        show=True
+        sched = sched[-1]
+        for a in sched:
+            L.append(a)
+    else:
+        show=False
+    return render_template("profile.html", username=session[secret], sch=L, show=show, name=query)
 
 @app.route('/schedule', methods=['POST'])
 def inputSchedule():

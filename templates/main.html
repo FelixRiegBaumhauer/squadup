@@ -40,7 +40,7 @@
             <ul class="nav navbar-nav navbar-right">
 				<li><i class="glyphicon glyphicon-lock"></i>
 					<form method="POST">
-						<input type="text" name="search" placeholder="Search" style="position: relative; top:-2px; width: 400px">
+						<input type="text" name="search" id="search" placeholder="Search" style="position: relative; top:-2px; width: 400px">
 					<input type="submit" name="submit" value="search"  class="btn btn-primary">
 
 </form>
@@ -62,7 +62,7 @@
 
         <div class="col-sm-7  col-sm-push-3" >
 
-
+						  {% block content %}
 							<form method="POST">
 								<br>
 								<textarea rows="3" cols="70" id="origin" placeholder="Update your location"></textarea>
@@ -80,7 +80,7 @@
 							</form>
 							<hr>
 
-						  {% block content %}
+
 
                 </div>
                 <!--/col-->

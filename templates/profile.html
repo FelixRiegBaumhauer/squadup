@@ -3,8 +3,19 @@
 {% block content %}
 
 
+
+{% if own %}
+<form method="POST" action="/upload" enctype="multipart/form-data">
+    <input type="file" name="file" id="file">
+<input type="submit" value="upload" name="submit">
+</form>
+{% endif %}
+
 {% if show %}
-You Schedule
+<br>
+<h2>
+{{name}}'s Schedule<br>
+</h2>
 <ul>
 {% for pd in sch[1:] %}
     <li>{{ pd }}</li>
@@ -61,6 +72,5 @@ Post Your Schedule
 -->
 <br>
 <br>
-<br>
-<br>
+
 {% endblock %}
