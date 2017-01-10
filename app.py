@@ -17,10 +17,16 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-@app.route("/")
+@app.route("/", methods=["GET","POST"])
 def main():
     if(secret in session):
-        return render_template('main.html')
+        if request.method=="GET":
+            return render_template('main.html')
+        else:
+            if request.form["submit"]=="post":
+                return "fxn to update current location"
+            else:
+                return "fxn to search"
     return render_template("login.html")
 
 

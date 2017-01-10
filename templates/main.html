@@ -39,9 +39,9 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
 				<li><i class="glyphicon glyphicon-lock"></i>
-					<form>
+					<form method="POST">
 						<input type="text" name="search" placeholder="Search" style="position: relative; top:-2px; width: 400px">
-					<button type="submit">Submit</button>
+					<input type="submit" name="submit" value="search"  class="btn btn-primary">
 
 </form>
 					</li>
@@ -63,7 +63,7 @@
         <div class="col-sm-7  col-sm-push-3" >
 
 
-							<form>
+							<form method="POST">
 								<br>
 								<textarea rows="3" cols="70" id="origin" placeholder="Update your location"></textarea>
 								<br>
@@ -74,7 +74,8 @@
       new google.maps.places.Autocomplete(input1, options);
     </script>
 
-							<button type="submit">Post</button>
+		<input type="submit" name="submit" value="post"  class="btn btn-primary">
+
 
 							</form>
 							<hr>
