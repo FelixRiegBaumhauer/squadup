@@ -15,5 +15,3 @@ gioT -- 2017-01-09 07:23--added code to make new user id for each new user, crea
 gioT -- 2017-01-09 13:43--fixed bug that occured when assigning new users a user id, tested, also fixed bug that occured when first user trying to register
 
 kathyL -- 2017-01-09 13:13:59-- added uploading functions in app.py, created upload.html for testing ~~
-
-gioT -- 2017-01-09 19:35--wrote function to add schedule to schedule table, created schedule table in users.db, still have to debug
