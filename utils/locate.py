@@ -15,7 +15,7 @@ def updateLoc(loc, user):
     c=db.cursor()
     c.execute('UPDATE users SET location = "'+loc+'" WHERE username="'+user+'";')
 
-    showtime = strftime("%Y-%m-%d %H:%M:%S", gmtime())[6:]
+    showtime = strftime("%Y-%m-%d %H:%M:%S", gmtime())[6:-3]
     c.execute('UPDATE users SET time = "' + showtime +'" WHERE username="' + user+ '";')
     
     db.commit()
