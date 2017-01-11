@@ -25,7 +25,7 @@ def main():
             return render_template('main.html',username=session[secret],news=feed)
         else:
             if request.form["submit"]=="post":
-                updateLoc(request.form["origin"], session[secret]
+                utils.locate.updateLoc(request.form["location"], session[secret])
                 return redirect(url_for('main'))
             if request.form["submit"]=="search":
                 #users = utils.search.searchUsers(request.form['search'])
@@ -183,7 +183,12 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('uploaded_file',
                                     filename=filename))
-
+'''
+@app.route('/updateloc', methods=['POST'])
+def updateLocation():
+    utils.locate.updateLoc(request.form["location"],session[secret])
+    return render_template('profiles.html')
+'''
 
 '''
 @app.route('/main')
