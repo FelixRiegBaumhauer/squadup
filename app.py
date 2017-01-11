@@ -33,15 +33,6 @@ def main():
     return render_template("login.html")
 
 
-NAMES=["abc","abcd","abcde","abcdef"]
-
-@app.route('/autocomplete',methods=['GET'])
-def autocomplete():
-    search = request.args.get('term')
-
-    app.logger.debug(search)
-    return jsonify(json_list=NAMES) 
-
 @app.route("/login", methods=["POST"])
 def verify_login():
     given_user = request.form["username"]
