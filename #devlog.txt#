@@ -1,0 +1,26 @@
+Seize the Day
+SquadUp DEVLOG
+
+felixR -- 2017-01-05 11:30--created the repo housing our design document, and along with other group members, finalized our design doc
+
+kathyL -- 2017-01-07 13:55--added bootstrap, tested design of index and home page
+
+felixR -- 2017-01-07 18:25--created the framework for the project: allows for the creation of accounts, logging in. Still needs significant refinement, there needs to be a way to create and assign id numbers. Additional issues: ocasionally pipes break, this is sporadic and I will look into it.
+
+kathyL -- 2017-01-07 22:05--added the autofill in for updating location, tested converting image to text successfully --> located on my own repo for now. considering using google vision api
+
+gioT -- 2017-01-09 07:23--added code to make new user id for each new user, created basic profile template, created the basic architecture for uploading one's schedule in app.py
+
+gioT -- 2017-01-09 13:43--fixed bug that occured when assigning new users a user id, tested, also fixed bug that occured when first user trying to register
+
+kathyL -- 2017-01-09 13:13:59-- added uploading functions in app.py, created upload.html for testing ~~
+
+gioT -- 2017-01-09 19:35--wrote function to add schedule to schedule table, created schedule table in users.db, still have to debug
+
+felixR -- 2017-01-09 21:00--reconfigured the database, along with small aesthetic changes: i.e. the creation of user instructions and such.
+
+felixR  2017-01-09 21:35--Fixed the until then non working mechanism meant to pull entered schedules and place them in the database, nw users can enter their schedules, issue still remaining: users can continuslly add schedules, ie there is no restriction on auser claiming that they have 10 schedules
+
+kathyL -- 2017-01-10 00:34--added a return most updated version of user schedule in schedule.py to show in profile page. made upload button work--users now upload to static/images folder. also changed what gets display on profile page. if they already inputted a schedule, then schedule will show. if not, a form will show.
+
+kathyL -- 2017-01-10 7:50--made app able to process 2 different forms by selection of button
