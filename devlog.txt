@@ -34,3 +34,5 @@ malickS -- --Added basic structure for changing your current location from in no
 will add dates later
 
 kathyL -- 2017-01-10 17:23--made searching for other users work. if user is not in database, then msg will say that. display user's name on each schedule page. removed unnecessary text boxes
+
+kathyL --2016-01-10 23:40--edited profile page so now u can go edit your schedule whenever you like. displayed users from users table on front page

@@ -12,6 +12,7 @@
 		<![endif]-->
 		<link rel="icon" href="/static/octo.png">
 		<link href="/static/css/styles.css" rel="stylesheet">
+		<link href="/static/css/app.css" rel="stylesheet">
 
 	  <script src="http://maps.google.com/maps/api/js?sensor=false"
             type="text/javascript"></script>
@@ -63,7 +64,17 @@
         <div class="col-sm-7  col-sm-push-3" >
 
 						  {% block content %}
-							<form method="POST">
+						
+<form name = "curr_loc">
+    <select name="current" onchange = optionchanged()>
+        <option selected disabled>-- Select Current Location --</option>
+        <option value="inschool">In Normal Stuy Class</option>
+        <option value="out">Outside of stuy</option>
+     </select>
+    <input type="button" onclick="getNumber(this.form)" value="Update" name="button">
+</form>
+
+	<form method="POST">
 								<br>
 								<textarea rows="3" cols="70" id="origin" placeholder="Update your location"></textarea>
 								<br>
@@ -79,7 +90,21 @@
 
 							</form>
 							<hr>
+		{% for a in news %}
+			{{a[1]}} was at 
+				{% if a[3]=='' %}
+					home
+				{% else %}
+				{{a[3]}} 
+				{% endif %}
 
+				since 
+				{% if a[3]=='' %}
+					who knows
+				{% else %}
+
+		{{a[4]}} {% endif %} <br>
+		{% endfor %}
 
 
                 </div>

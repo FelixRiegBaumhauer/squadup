@@ -3,7 +3,7 @@
 
 
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash
-import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search
+import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
@@ -21,7 +21,8 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def main():
     if(secret in session):
         if request.method=="GET":
-            return render_template('main.html',username=session[secret])
+            feed = utils.locate.retUsers()
+            return render_template('main.html',username=session[secret],news=feed)
         else:
             if request.form["submit"]=="post":
                 return "fxn to update current location"
@@ -95,19 +96,24 @@ def verify_signup():
 
     return redirect(url_for('present_signup'))
 
+
 @app.route('/profile', methods=['POST','GET'])
 def dispProfile():
     if(secret not in session):
         return render_template('login.html')
 
+    L = [] #instantiate vars
+    sched = (utils.schedule.retSchedule(session[secret]))
+    loc =(utils.schedule.retCurrentLocation(session[secret]))
+
     if request.method=="POST":
         if request.form["submit"]=="search":
             q = request.form['search']
             return redirect("/profile/" + q)
-    sched = (utils.schedule.retSchedule(session[secret]))
-    loc =(utils.schedule.retCurrentLocation(session[secret]))
-    L = []
-    if len(sched) != 0:
+        if request.form["submit"]=="edit":
+            show = False
+            return render_template("profile.html", username=session[secret], sch=L, show=show, own=True, name=session[secret],location = loc)            
+    if len(sched) != 0:     #if GET request
         show=True
         sched = sched[-1]
         for a in sched:
@@ -115,6 +121,7 @@ def dispProfile():
     else:
         show=False
     return render_template("profile.html", username=session[secret], sch=L, show=show, own=True, name=session[secret],location = loc)
+
 
 @app.route('/profile/<query>', methods=['POST','GET'])
 def dispFriendProfile(query):
@@ -132,7 +139,7 @@ def dispFriendProfile(query):
         for a in sched:
             L.append(a)
     else:
-        show=False
+        show=True
     return render_template("profile.html", username=session[secret], sch=L, show=show, name=query)
 
 @app.route('/schedule', methods=['POST'])

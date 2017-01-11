@@ -47,23 +47,12 @@
 
 
 {% if own %}
-<form method="POST" action="/upload" enctype="multipart/form-data">
-    <input type="file" name="file" id="file">
-<input type="submit" value="upload" name="submit">
+<form method="POST">
+<input type="submit" value="edit" name="submit">
 </form>
 {% endif %}
 
 {% if show %}
-<br>
-<form name = "curr_loc">
-    <select name="current" onchange = optionchanged()>
-        <option selected disabled>-- Select Current Location --</option>
-        <option value="inschool">In Normal Stuy Class</option>
-        <option value="out">Outside of stuy</option>
-     </select>
-    <input type="button" onclick="getNumber(this.form)" value="Update" name="button">
-</form>
-<br>
 </div>
 <h2>
 {{name}}'s Schedule<br>
@@ -76,8 +65,15 @@
 
 
 {% else %}
+<h3>Upload Your Schedule</h3>
+<form method="POST" action="/upload" enctype="multipart/form-data">
+    <input type="file" name="file" id="file">
+<input type="submit" value="upload" name="submit">
+</form>
 
+<h3>OR
 Post Your Schedule
+</h3>
 <form action="/schedule" method="POST">
   Period 1 
   <input type="text" name="pd1" value="">
