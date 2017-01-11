@@ -54,7 +54,6 @@ def verify_login():
 
 
 
-
 @app.route("/logout")
 def log_user_out():
     print session
@@ -98,11 +97,15 @@ def verify_signup():
 
 @app.route('/profile', methods=['POST','GET'])
 def dispProfile():
+    if(secret not in session):
+        return render_template('login.html')
+
     if request.method=="POST":
         if request.form["submit"]=="search":
             q = request.form['search']
             return redirect("/profile/" + q)
     sched = (utils.schedule.retSchedule(session[secret]))
+    loc =(utils.schedule.retCurrentLocation(session[secret]))
     L = []
     if len(sched) != 0:
         show=True
@@ -111,7 +114,7 @@ def dispProfile():
             L.append(a)
     else:
         show=False
-    return render_template("profile.html", username=session[secret], sch=L, show=show, own=True, name=session[secret])
+    return render_template("profile.html", username=session[secret], sch=L, show=show, own=True, name=session[secret],location = loc)
 
 @app.route('/profile/<query>', methods=['POST','GET'])
 def dispFriendProfile(query):

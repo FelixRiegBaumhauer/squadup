@@ -3,7 +3,9 @@
 {% block content %}
 
 <script src = "/static/js/index.js"></script>
-<div id = "message"> Your current period is :<div id = "currentperiod">currrent period</div> </div>
+<div id = "message"> Your current location :<div id = "currentperiod">currrent period</div> </div>
+
+<div id = "location"> Your current location {{ loc }}</div>
 
 <br><br>
 <script>
@@ -39,6 +41,9 @@
 
 {{ sch[1] }}
 
+<div id = "current_location">
+
+
 
 
 {% if own %}
@@ -50,6 +55,16 @@
 
 {% if show %}
 <br>
+<form name = "curr_loc">
+    <select name="current" onchange = optionchanged()>
+        <option selected disabled>-- Select Current Location --</option>
+        <option value="inschool">In Normal Stuy Class</option>
+        <option value="out">Outside of stuy</option>
+     </select>
+    <input type="button" onclick="getNumber(this.form)" value="Update" name="button">
+</form>
+<br>
+</div>
 <h2>
 {{name}}'s Schedule<br>
 </h2>
@@ -61,7 +76,6 @@
 
 
 {% else %}
-
 
 Post Your Schedule
 <form action="/schedule" method="POST">
@@ -99,7 +113,17 @@ Post Your Schedule
 </form>
 {% endif %}
 
-
+<script>
+//add functions for updating current location
+function getNumber(form) {
+    
+}
+    
+function optionchanged() {
+    
+}
+    
+</script>
 
 <!--
 <form action="/upload" method="post" enctype="multipart/form-data"> ...

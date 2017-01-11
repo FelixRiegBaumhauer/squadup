@@ -20,4 +20,10 @@ def retSchedule(user):
     c=db.cursor()
     c.execute('''SELECT * FROM schedule WHERE userID==''' +"'" +str(user)+"'" +';')
     return c.fetchall()
+
+def retCurrentLocation(user):
+    db=sqlite3.connect("data/users.db")
+    c=db.cursor()
+    c.execute('''SELECT location FROM users WHERE username==''' +"'" +str(user)+"'" +';')
+    return c.fetchall()
 #print retSchedule('qwerty')[-1]

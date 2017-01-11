@@ -1,7 +1,8 @@
 //time is variable which represents current number of minutes since 12am
 function currentperiod(time) {
     if (time < 480) {
-        return 0;
+        return "school is not in session";;
+        
     }
     else if (time < 525) {
         return 1;
@@ -34,7 +35,8 @@ function currentperiod(time) {
         return 10;
     }
     else {
-        return 0;
+        console.log('test');
+        return "school is not in session";
     }
     
 }
@@ -49,3 +51,4 @@ console.log(currentperiod(sum_mins));
 
 
 
+console.log('hi');
