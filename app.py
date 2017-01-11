@@ -2,7 +2,7 @@
 #(Sachal, Kathy, Felix, Gio)
 
 
-from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash
+from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash, jsonify
 import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate
 from werkzeug.utils import secure_filename
 
@@ -29,12 +29,18 @@ def main():
             if request.form["submit"]=="search":
                 #users = utils.search.searchUsers(request.form['search'])
                 q = request.form['search']
-                return redirect("/profile/" + q)
-                    
+                return redirect("/profile/" + q)           
     return render_template("login.html")
 
 
+NAMES=["abc","abcd","abcde","abcdef"]
 
+@app.route('/autocomplete',methods=['GET'])
+def autocomplete():
+    search = request.args.get('term')
+
+    app.logger.debug(search)
+    return jsonify(json_list=NAMES) 
 
 @app.route("/login", methods=["POST"])
 def verify_login():
@@ -128,6 +134,8 @@ def dispFriendProfile(query):
     if len(utils.search.searchUsers(query))<1:
                 return 'User not found'
     if request.method=="POST":
+        if request.form["submit"]=="add_friend":
+            return "fxn to add friend"
         if request.form["submit"]=="search":
             q = request.form['search']
             return redirect("/profile/" + q)
@@ -140,7 +148,7 @@ def dispFriendProfile(query):
             L.append(a)
     else:
         show=True
-    return render_template("profile.html", username=session[secret], sch=L, show=show, name=query)
+    return render_template("profile.html", username=session[secret], sch=L, show=show, name=query, friendBtn=True)
 
 @app.route('/schedule', methods=['POST'])
 def inputSchedule():
