@@ -95,9 +95,9 @@
 							</form>
 							<hr>
 		{% for a in news %}
-			{{a[1]}} was at
+			<a href="/profile/{{a[1]}}"> {{a[1]}} </a> was at
 				{% if a[3]=='' %}
-					home
+					unknown
 				{% else %}
 				{{a[3]}}
 				{% endif %}

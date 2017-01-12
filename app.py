@@ -132,7 +132,8 @@ def dispFriendProfile(query):
                 return 'User not found'
     if request.method=="POST":
         if request.form["submit"]=="add_friend":
-            return "fxn to add friend"
+            utils.search.sa_friend(session[secret], query)
+            return redirect('/profile/' + query)
         if request.form["submit"]=="search":
             q = request.form['search']
             return redirect("/profile/" + q)
@@ -150,7 +151,8 @@ def dispFriendProfile(query):
             L.append(a)
     else:
         show=True
-    return render_template("profile.html", username=session[secret], sch=L, show=show, name=query, friendBtn=True, location = loc)
+    friend_status = utils.search.is_friends(session[secret], query)
+    return render_template("profile.html", username=session[secret], sch=L, show=show, name=query, location = loc, status=friend_status)
 
 @app.route('/schedule', methods=['POST'])
 def inputSchedule():

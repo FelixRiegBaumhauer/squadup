@@ -39,4 +39,4 @@ kathyL --2016-01-10 23:40--edited profile page so now u can go edit your schedul
 
 kathyL --2017-01-11 10:40--made file for initialization of db files, added functions to add friend and check for friend status inside search file
 
-kathyL --2017-01-11 18:12--edited update location fxn to also update time, main page now only shows users who have inputted their location, sorted by time
+kathyL --2017-01-12 00:27--created friend table. adding friends implemented in app! displays if you have sent a friend request, received one, or are already friends on profile page

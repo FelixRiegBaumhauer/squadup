@@ -51,12 +51,20 @@
 </form>
 {% endif %}
 
-{% if friendBtn %}
-
+{% if status == 0 %}
+Friend Request Sent
+{% elif status == 3 %}
 <form method="POST">
 <input type="submit" value="add_friend" name="submit">
 </form>
+{% elif status == 1 %}
+<form method="POST"> Accept friend request >
+<input type="submit" value="add_friend" name="submit">
+</form>
+{% else %}
+Friends
 {% endif %}
+
 
 {% if show %}
 </div>
