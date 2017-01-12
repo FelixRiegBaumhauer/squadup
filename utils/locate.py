@@ -7,9 +7,10 @@ from time import gmtime, strftime
 def retUsers():
     db=sqlite3.connect("data/users.db")
     c=db.cursor()
-    c.execute('SELECT * FROM users;')
+    c.execute('SELECT * FROM users WHERE time != "";')
     return c.fetchall()[::-1]
 
+print retUsers()
 def updateLoc(loc, user):
     db=sqlite3.connect("data/users.db")
     c=db.cursor()

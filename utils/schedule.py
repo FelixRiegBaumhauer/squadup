@@ -26,4 +26,4 @@ def retCurrentLocation(user):
     c=db.cursor()
     c.execute('''SELECT location FROM users WHERE username==''' +"'" +str(user)+"'" +';')
     return c.fetchall()
-#print retSchedule('qwerty')[-1]
+

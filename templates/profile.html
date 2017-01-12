@@ -3,17 +3,17 @@
 {% block content %}
 
 <script src = "/static/js/index.js"></script>
-<div id = "message"> Your current Period :<div id = "currentperiod">currrent period</div> </div>
+<div id = "message"> Current Period :<div id = "currentperiod">currrent period</div> </div>
 
-<div id = "location"> Your current location {{ location }}</div>
+<div id = "location">Current location: {{ location }}</div>
 
 <br><br>
 <script>
-    
+
     var curpd = currentperiod(sum_mins);
     document.getElementById("currentperiod").innerHTML = curpd;
     //alert("hello".concat("hi"));
-   
+
     if (curpd === 1) {
      document.getElementById("currentperiod").innerHTML = "{{ sch[1] }}";
 
@@ -81,31 +81,31 @@
 Post Your Schedule
 </h3>
 <form action="/schedule" method="POST">
-  Period 1 
+  Period 1
   <input type="text" name="pd1" value="">
   <br>
-  Period 2 
+  Period 2
   <input type="text" name="pd2" value="">
   <br>
-  Period 3 
+  Period 3
   <input type="text" name="pd3" value="">
   <br>
-  Period 4 
+  Period 4
   <input type="text" name="pd4" value="">
   <br>
-  Period 5 
+  Period 5
   <input type="text" name="pd5" value="">
   <br>
-  Period 6 
+  Period 6
   <input type="text" name="pd6" value="">
   <br>
-  Period 7 
+  Period 7
   <input type="text" name="pd7" value="">
   <br>
-  Period 8 
+  Period 8
   <input type="text" name="pd8" value="">
   <br>
-  Period 9 
+  Period 9
   <input type="text" name="pd9" value="">
   <br>
   Period 10
@@ -118,13 +118,13 @@ Post Your Schedule
 <script>
 //add functions for updating current location
 function getNumber(form) {
-    
+
 }
-    
+
 function optionchanged() {
-    
+
 }
-    
+
 </script>
 
 <!--

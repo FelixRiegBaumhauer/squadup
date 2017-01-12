@@ -5,6 +5,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash, jsonify
 import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate
 from werkzeug.utils import secure_filename
+from time import gmtime, strftime
 
 app = Flask(__name__)
 
@@ -22,6 +23,7 @@ def main():
     if(secret in session):
         if request.method=="GET":
             feed = utils.locate.retUsers()
+            feed = sorted(feed, key=lambda x: x[4], reverse=True)
             return render_template('main.html',username=session[secret],news=feed)
         else:
             if request.form["submit"]=="post":
@@ -102,8 +104,11 @@ def dispProfile():
 
     L = [] #instantiate vars
     sched = (utils.schedule.retSchedule(session[secret]))
-    loc =(utils.schedule.retCurrentLocation(session[secret]))
-
+    loc = (utils.schedule.retCurrentLocation(session[secret]))
+    try:
+        loc = loc[0][0]
+    except:
+        loc = ''
     if request.method=="POST":
         if request.form["submit"]=="search":
             q = request.form['search']
@@ -131,6 +136,11 @@ def dispFriendProfile(query):
         if request.form["submit"]=="search":
             q = request.form['search']
             return redirect("/profile/" + q)
+    loc = (utils.schedule.retCurrentLocation(query))
+    try:
+        loc = loc[0][0]
+    except:
+        loc = ''
     sched = (utils.schedule.retSchedule(query))
     L = []
     if len(sched) != 0:
@@ -140,7 +150,7 @@ def dispFriendProfile(query):
             L.append(a)
     else:
         show=True
-    return render_template("profile.html", username=session[secret], sch=L, show=show, name=query, friendBtn=True)
+    return render_template("profile.html", username=session[secret], sch=L, show=show, name=query, friendBtn=True, location = loc)
 
 @app.route('/schedule', methods=['POST'])
 def inputSchedule():
