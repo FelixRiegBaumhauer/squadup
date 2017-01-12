@@ -45,7 +45,7 @@
 
 
 
-{% if own %}
+{% if status == -1 %}
 <form method="POST">
 <input type="submit" value="edit" name="submit">
 </form>
@@ -65,23 +65,7 @@ Friend Request Sent
 Friends
 {% endif %}
 
-
-{% if status == 2 %}
-
-</div>
-<h2>
-{{name}}'s Schedule<br>
-</h2>
-<ul>
-{% for pd in sch[1:] %}
-    <li>{{ pd }}</li>
-{% endfor %}
-</ul>
-
-{% elif status == 1 or status == 0 %}
-
-
-{% else %}
+{% if status == -2 %}
 <h3>Upload Your Schedule</h3>
 <form method="POST" action="/upload" enctype="multipart/form-data">
     <input type="file" name="file" id="file">
@@ -124,6 +108,23 @@ Post Your Schedule
   <br><br>
   <input type="submit" value="Submit">
 </form>
+{% endif %}
+{% if status == 2 or status == -1%}
+
+</div>
+<h2>
+{{name}}'s Schedule<br>
+</h2>
+<ul>
+{% for pd in sch[1:] %}
+    <li>{{ pd }}</li>
+{% endfor %}
+</ul>
+
+{% elif status == 1 or status == 0 %}
+
+
+
 {% endif %}
 
 <script>

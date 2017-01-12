@@ -109,14 +109,15 @@ def dispProfile():
         loc = loc[0][0]
     except:
         loc = ''
-    status = 2
     if request.method=="POST":
         if request.form["submit"]=="search":
             q = request.form['search']
             return redirect("/profile/" + q)
         if request.form["submit"]=="edit":
             show = False
+            status = -2
             return render_template("profile.html", username=session[secret], sch=L, show=show, own=True, name=session[secret],location = loc,status=status)
+    status = -1
     if len(sched) != 0:     #if GET request
         show=True
         sched = sched[-1]
@@ -131,6 +132,8 @@ def dispProfile():
 def dispFriendProfile(query):
     if len(utils.search.searchUsers(query))<1:
                 return 'User not found'
+    if query == session[secret]:
+        return redirect("/profile")
     if request.method=="POST":
         if request.form["submit"]=="add_friend":
             utils.search.sa_friend(session[secret], query)
@@ -153,8 +156,6 @@ def dispFriendProfile(query):
     else:
         show=True
     friend_status = utils.search.is_friends(session[secret], query)
-    if query == session[secret]:
-        friend_status=2
     return render_template("profile.html", username=session[secret], sch=L, show=show, name=query, location = loc, status=friend_status)
 
 @app.route('/schedule', methods=['POST'])
