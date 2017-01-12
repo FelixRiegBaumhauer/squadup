@@ -66,7 +66,8 @@ Friends
 {% endif %}
 
 
-{% if show %}
+{% if status == 2 %}
+
 </div>
 <h2>
 {{name}}'s Schedule<br>
@@ -76,6 +77,8 @@ Friends
     <li>{{ pd }}</li>
 {% endfor %}
 </ul>
+
+{% elif status == 1 or status == 0 %}
 
 
 {% else %}
