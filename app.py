@@ -22,8 +22,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def main():
     if(secret in session):
         if request.method=="GET":
+
             feed = utils.locate.retUsers()
             feed = sorted(feed, key=lambda x: x[4], reverse=True)
+
             return render_template('main.html',username=session[secret],news=feed)
         else:
             if request.form["submit"]=="post":
@@ -36,7 +38,9 @@ def main():
             if request.form["submit"]=="Update":
                 location = request.form.get("current")
                 if location == "inschool":
-                    return "fxn to get current room location"
+                    pd = utils.schedule.getPeriod(session[secret])
+                    utils.locate.updateLoc(str(pd), session[secret])
+                    return redirect('/')
                 else:
                     return "outside of school"
     return render_template("login.html")
@@ -103,6 +107,7 @@ def verify_signup():
     return redirect(url_for('present_signup'))
 
 
+
 @app.route('/profile', methods=['POST','GET'])
 def dispProfile():
     if(secret not in session):
@@ -132,6 +137,7 @@ def dispProfile():
     else:
         show=False
     return render_template("profile.html", username=session[secret], sch=L, show=show, own=True, name=session[secret],location = loc,status=status)
+
 
 
 @app.route('/profile/<query>', methods=['POST','GET'])

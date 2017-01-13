@@ -1,5 +1,8 @@
 import sqlite3
 
+from datetime import datetime
+
+
 def createSchedule(schedule, userID):
     db=sqlite3.connect("data/users.db")
     c=db.cursor()
@@ -45,3 +48,35 @@ def retClassmates(user):
         pd+=1
         classes.append(classmates)
     return classes
+
+def getPeriod(user):
+    Rperiod = [
+        [460,521],
+        [520,566],
+        [565,615],
+        [614,661],
+        [660,707],
+        [706,753],
+        [752,799],
+        [798,845],
+        [844,890],
+        [889,935],
+        [934,1440],
+        [934,1440],
+        [0,480]
+    ]
+    time = datetime.now()
+    hour = time.strftime('%H')
+    minute = time.strftime('%M')
+    Tminute = 60 * int(hour) + int(minute)
+    i = 0
+    while i < len(Rperiod):
+        if Tminute >=Rperiod[i][0] and Tminute <= Rperiod[i][1]:
+            sched = retSchedule(user)
+            if len(sched) > 0:
+                return sched[0][i+1]
+            else:
+                return -1
+            #return i+1
+        i+=1
+    return -1
