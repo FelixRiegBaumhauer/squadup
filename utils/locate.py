@@ -4,13 +4,23 @@
 import sqlite3
 from time import gmtime, strftime
 
+#return users who have a current location
 def retUsers():
     db=sqlite3.connect("data/users.db")
     c=db.cursor()
     c.execute('SELECT * FROM users WHERE time != "";')
     return c.fetchall()[::-1]
 
-print retUsers()
+#print retUsers()
+
+#return all users who have registered
+def retAllUsers():
+    db=sqlite3.connect("data/users.db")
+    c=db.cursor()
+    c.execute('SELECT * FROM users;')
+    return c.fetchall()[::-1]
+
+
 def updateLoc(loc, user):
     db=sqlite3.connect("data/users.db")
     c=db.cursor()

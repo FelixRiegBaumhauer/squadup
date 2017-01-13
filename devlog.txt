@@ -42,3 +42,5 @@ kathyL --2017-01-11 10:40--made file for initialization of db files, added funct
 kathyL --2017-01-12 00:27--created friend table. adding friends implemented in app! displays if you have sent a friend request, received one, or are already friends on profile page
 
 kathyL --2017-01-12 13:52--finished friend fxnality
+
+kathyL --2017-01-12 19:32--did the autofill in for the search bar ^_^

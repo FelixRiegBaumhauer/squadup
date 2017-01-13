@@ -9,7 +9,7 @@ from time import gmtime, strftime
 
 app = Flask(__name__)
 
-app.secret_key = 'seizetheday' #maybe this os.urandom(32)
+app.secret_key = os.urandom(32)
 secret=""
 
 
@@ -169,7 +169,21 @@ def inputSchedule():
     return redirect(url_for('main'))
 
 
-
+@app.route("/search/<string:box>")
+def process(box):
+    query = request.args.get('query')
+    suggestions = []    
+    tmpList = utils.locate.retAllUsers()
+    for t in tmpList:
+        suggestions.append({'value':t[1]})
+    if box == 'names':
+        # do some stuff to open your names text file
+        # do some other stuff to filter
+        # put suggestions in this format...
+        #suggestions = [{'value': 'joe'}, {'value': 'jim'}]
+        return jsonify({"suggestions":suggestions})
+    
+        
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -199,18 +213,6 @@ def upload_file():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             return redirect(url_for('uploaded_file',
                                     filename=filename))
-'''
-@app.route('/updateloc', methods=['POST'])
-def updateLocation():
-    utils.locate.updateLoc(request.form["location"],session[secret])
-    return render_template('profiles.html')
-'''
-
-'''
-@app.route('/main')
-def main():
-    return render_template("main.html")
-'''
 
 
 
