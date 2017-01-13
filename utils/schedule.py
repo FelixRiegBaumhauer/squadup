@@ -37,7 +37,9 @@ def retClassmates(user):
     classes=[]
     while(pd<11):
         c.execute('SELECT pd'+str(pd)+' FROM schedule WHERE userID="'+user+'";')
-        yourClass=c.fetchall()[0][0]
+        yourClass=c.fetchall()
+        if(len(yourClass)!=0):
+            yourClass=yourClass[0][0]
         print yourClass
         c.execute('SELECT userID, pd'+str(pd)+' FROM schedule;')
         usersClasses=c.fetchall()

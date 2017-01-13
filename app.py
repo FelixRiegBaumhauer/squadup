@@ -116,6 +116,7 @@ def dispProfile():
     L = [] #instantiate vars
     sched = (utils.schedule.retSchedule(session[secret]))
     loc = (utils.schedule.retCurrentLocation(session[secret]))
+    classmates = (utils.schedule.retClassmates(session[secret]))
     try:
         loc = loc[0][0]
     except:
@@ -136,7 +137,7 @@ def dispProfile():
             L.append(a)
     else:
         show=False
-    return render_template("profile.html", username=session[secret], sch=L, show=show, own=True, name=session[secret],location = loc,status=status)
+    return render_template("profile.html", username=session[secret], sch=zip(L[1:], classmates), show=show, own=True, name=session[secret],location = loc,status=status)
 
 
 

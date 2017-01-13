@@ -116,8 +116,12 @@ Post Your Schedule
 {{name}}'s Schedule<br>
 </h2>
 <ul>
-{% for pd in sch[1:] %}
-    <li>{{ pd }}</li>
+{% for pd,class in sch[1:] %}
+    <li>{{ pd }}<br>
+      {% for ppl in class %}
+      {{ ppl }},
+      {% endfor %}
+    </li>
 {% endfor %}
 </ul>
 
