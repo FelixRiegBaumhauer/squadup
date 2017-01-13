@@ -83,13 +83,14 @@
 
 						  {% block content %}
 
-<form name = "curr_loc">
+<form method="POST">
     <select name="current" onchange = optionchanged()>
         <option selected disabled>-- Select Current Location --</option>
         <option value="inschool">In Normal Stuy Class</option>
         <option value="out">Outside of stuy</option>
      </select>
-    <input type="button" onclick="getNumber(this.form)" value="Update" name="button">
+    <!-- <input type="submit" onclick="getNumber(this.form)" value="Update" name="button"> -->
+		<input type="submit" value="Update" name="submit">
 </form>
 
 	<form method="POST">

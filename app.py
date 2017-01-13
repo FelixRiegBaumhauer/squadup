@@ -9,7 +9,7 @@ from time import gmtime, strftime
 
 app = Flask(__name__)
 
-app.secret_key = os.urandom(32)
+app.secret_key = 'idk'#os.urandom(32)
 secret=""
 
 
@@ -33,6 +33,12 @@ def main():
                 #users = utils.search.searchUsers(request.form['search'])
                 q = request.form['search']
                 return redirect("/profile/" + q)
+            if request.form["submit"]=="Update":
+                location = request.form.get("current")
+                if location == "inschool":
+                    return "fxn to get current room location"
+                else:
+                    return "outside of school"
     return render_template("login.html")
 
 
@@ -172,7 +178,7 @@ def inputSchedule():
 @app.route("/search/<string:box>")
 def process(box):
     query = request.args.get('query')
-    suggestions = []    
+    suggestions = []
     tmpList = utils.locate.retAllUsers()
     for t in tmpList:
         suggestions.append({'value':t[1]})
@@ -182,8 +188,8 @@ def process(box):
         # put suggestions in this format...
         #suggestions = [{'value': 'joe'}, {'value': 'jim'}]
         return jsonify({"suggestions":suggestions})
-    
-        
+
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
