@@ -2,7 +2,7 @@
 #making this show all locations for now
 
 import sqlite3
-from time import gmtime, strftime
+from time import gmtime, localtime, strftime
 
 #return users who have a current location
 def retUsers():
@@ -26,7 +26,7 @@ def updateLoc(loc, user):
     c=db.cursor()
     c.execute('UPDATE users SET location = "'+loc+'" WHERE username="'+user+'";')
 
-    showtime = strftime("%Y-%m-%d %H:%M:%S", gmtime())[6:-3]
+    showtime = strftime("%Y-%m-%d %H:%M:%S", localtime())[6:-3]
     c.execute('UPDATE users SET time = "' + showtime +'" WHERE username="' + user+ '";')
     
     db.commit()
