@@ -32,6 +32,7 @@ malickS -- --Wrote js functions for checking which current period it is
 malickS -- --Wrote js functions that tell you what class you should be in
 malickS -- --fixed sessions so automatically logs u out if not logged in
 malickS -- --Added basic structure for changing your current location from in normal classes to out of stuy, still need python function for updating current location in database
+malickS -- --Fixed time stamps
 
 will add dates later
 
