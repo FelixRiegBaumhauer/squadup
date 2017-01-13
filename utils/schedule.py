@@ -27,3 +27,21 @@ def retCurrentLocation(user):
     c.execute('''SELECT location FROM users WHERE username==''' +"'" +str(user)+"'" +';')
     return c.fetchall()
 
+def retClassmates(user):
+    db=sqlite3.connect("data/users.db")
+    c=db.cursor()
+    pd=1
+    classes=[]
+    while(pd<11):
+        c.execute('SELECT pd'+str(pd)+' FROM schedule WHERE userID="'+user+'";')
+        yourClass=c.fetchall()[0][0]
+        print yourClass
+        c.execute('SELECT userID, pd'+str(pd)+' FROM schedule;')
+        usersClasses=c.fetchall()
+        classmates=[]
+        for people in usersClasses:
+            if(yourClass==people[1] and people[0]!=user):
+                classmates.append(people[0])
+        pd+=1
+        classes.append(classmates)
+    return classes
