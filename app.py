@@ -45,7 +45,7 @@ def main():
                 pd = utils.schedule.getPeriod(session[secret])
                 utils.locate.updateLoc(str(pd), session[secret])
                 return redirect('/')
-            return render_template("login.html")
+    return render_template("login.html")
 
 
 @app.route("/login", methods=["POST"])
