@@ -24,9 +24,15 @@ def main():
         if request.method=="GET":
 
             feed = utils.locate.retUsers()
-            feed = sorted(feed, key=lambda x: x[4], reverse=True)
+            feed = sorted(feed, key=lambda x: x[4], reverse=True) # sort users by time updated
 
-            return render_template('main.html',username=session[secret],news=feed)
+            if utils.schedule.retCurrentLocation(session[secret])[0][0].isdigit(): #check if current location is in skool (a room #)
+                leave=False
+                pd = utils.schedule.getPeriod(session[secret])
+                utils.locate.updateLoc(str(pd), session[secret])
+            else:
+                leave=True
+            return render_template('main.html',username=session[secret],news=feed,leave=leave)
         else:
             if request.form["submit"]=="post":
                 utils.locate.updateLoc(request.form["location"], session[secret])
@@ -35,15 +41,11 @@ def main():
                 #users = utils.search.searchUsers(request.form['search'])
                 q = request.form['search']
                 return redirect("/profile/" + q)
-            if request.form["submit"]=="Update":
-                location = request.form.get("current")
-                if location == "inschool":
-                    pd = utils.schedule.getPeriod(session[secret])
-                    utils.locate.updateLoc(str(pd), session[secret])
-                    return redirect('/')
-                else:
-                    return "outside of school"
-    return render_template("login.html")
+            if request.form["submit"]=="Leave":
+                pd = utils.schedule.getPeriod(session[secret])
+                utils.locate.updateLoc(str(pd), session[secret])
+                return redirect('/')
+            return render_template("login.html")
 
 
 @app.route("/login", methods=["POST"])
@@ -128,11 +130,11 @@ def dispProfile():
         if request.form["submit"]=="edit":
             show = False
             status = -2
-            return render_template("profile.html", username=session[secret], sch=L, show=show, own=True, name=session[secret],location = loc,status=status)
+            return render_template("profile.html", username=session[secret], sch=L[1:], show=show, own=True, name=session[secret],location = loc,status=status)
     status = -1
     if len(sched) != 0:     #if GET request
         show=True
-        sched = sched[-1]
+        sched = sched[0]
         for a in sched:
             L.append(a)
     else:
@@ -169,7 +171,7 @@ def dispFriendProfile(query):
     else:
         show=True
     friend_status = utils.search.is_friends(session[secret], query)
-    return render_template("profile.html", username=session[secret], sch=L, show=show, name=query, location = loc, status=friend_status)
+    return render_template("profile.html", username=session[secret], sch=L[1:], show=show, name=query, location = loc, status=friend_status)
 
 @app.route('/schedule', methods=['POST'])
 def inputSchedule():
@@ -180,6 +182,11 @@ def inputSchedule():
         x+=1
     utils.schedule.createSchedule(schdl,session[secret])
     return redirect(url_for('main'))
+
+@app.route('/friends', methods=['GET', 'POST'])
+def friends():
+    friends = utils.search.retFriends(session[secret])
+    return render_template("friends.html", friends=friends)
 
 
 @app.route("/search/<string:box>")
@@ -232,5 +239,3 @@ def upload_file():
 if __name__ == '__main__':
     app.debug=True
     app.run()
-    #app.run()
-    #app.run('127.0.0.1', port=5000)

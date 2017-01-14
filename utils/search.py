@@ -51,4 +51,14 @@ def is_friends(q1, q2):
         return 3
 
 
+def retFriends(user):
+    db=sqlite3.connect("data/users.db")
+    c=db.cursor()
+    c.execute("SELECT * FROM friend where user1 ==" + "'" + user +  "';")
+    tmp = c.fetchall()
+    friendList = []
+    for a in tmp:
+        if is_friends(a[0], a[1]):
+            friendList.append(a[1])
+    return friendList
     

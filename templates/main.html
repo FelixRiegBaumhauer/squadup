@@ -67,7 +67,7 @@
 				<li><a href="/profile"><i class="glyphicon glyphicon-user"></i>{{username}}</a></li> |
 				<li><a href="/"> Home </a></li>
 			<li><a href="#"></i> Message</a></li>
-			<li><a href="#"></i> Notifications</a></li>
+			<li><a href="/friends"></i> Friends</a></li>
                       </ul>
         </div>
     </div>
@@ -83,16 +83,23 @@
 
 						  {% block content %}
 
-
+<!--
 <form method="POST">
     <select name="current" onchange = optionchanged()>
         <option selected disabled>-- Select Current Location --</option>
         <option value="inschool">In Normal Stuy Class</option>
         <option value="out">Outside of stuy</option>
      </select>
-    <!-- <input type="submit" onclick="getNumber(this.form)" value="Update" name="button"> -->
-		<input type="submit" value="Update" name="submit">
+     <input type="submit" onclick="getNumber(this.form)" value="Update" name="button">
+		<input type="submit" value="Update" name="submit"> 
 </form>
+-->
+{% if leave %}
+<form method="POST">
+    	<input type="submit" value="Leave" name="submit">
+</form>
+{% endif %}
+
 
 	<form method="POST">
 								<br>

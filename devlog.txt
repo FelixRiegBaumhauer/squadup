@@ -51,3 +51,5 @@ kathyL --2017-01-12 19:32--did the autofill in for the search bar ^_^
 gioT -- 2017-01-12 20:15--completed function that returns a list of your classmates
 
 gioT -- 2017-01-13 13:54--used function that returns list of classmates to display people who have same class as you for a specific period
+
+kathyL --2017-01-14 00:20--made leave butoon work as intended, added page to view friends, fixed viewing classmates fxn

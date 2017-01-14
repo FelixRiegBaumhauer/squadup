@@ -109,19 +109,32 @@ Post Your Schedule
   <input type="submit" value="Submit">
 </form>
 {% endif %}
-{% if status == 2 or status == -1%}
+{% if status == -1%}
 
 </div>
 <h2>
 {{name}}'s Schedule<br>
 </h2>
 <ul>
-{% for pd,class in sch[1:] %}
+{% for pd,class in sch[:] %}
     <li>{{ pd }}<br>
       {% for ppl in class %}
       {{ ppl }},
       {% endfor %}
     </li>
+{% endfor %}
+</ul>
+
+{% elif status == 2%}
+
+</div>
+<h2>
+{{name}}'s Schedule<br>
+</h2>
+<ul>
+{% for pd in sch[1:] %}
+    <li>{{ pd }}   </li>
+ 
 {% endfor %}
 </ul>
 

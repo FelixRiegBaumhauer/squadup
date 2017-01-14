@@ -40,13 +40,17 @@ def retClassmates(user):
         yourClass=c.fetchall()
         if(len(yourClass)!=0):
             yourClass=yourClass[0][0]
-        print yourClass
+        else:
+            yourClass='free'
         c.execute('SELECT userID, pd'+str(pd)+' FROM schedule;')
         usersClasses=c.fetchall()
-        classmates=[]
+        #print usersClasses, '\n\n'
+        #print usersClasses
         for people in usersClasses:
+            classmates=[]
             if(yourClass==people[1] and people[0]!=user):
                 classmates.append(people[0])
+                #print yourClass, people[1], people[0]
         pd+=1
         classes.append(classmates)
     return classes
@@ -62,23 +66,20 @@ def getPeriod(user):
         [752,799],
         [798,845],
         [844,890],
-        [889,935],
-        [934,1440],
-        [934,1440],
-        [0,480]
+        [889,935]
     ]
     time = datetime.now()
     hour = time.strftime('%H')
     minute = time.strftime('%M')
     Tminute = 60 * int(hour) + int(minute)
     i = 0
+    sched = retSchedule(user)
     while i < len(Rperiod):
         if Tminute >=Rperiod[i][0] and Tminute <= Rperiod[i][1]:
-            sched = retSchedule(user)
             if len(sched) > 0:
                 return sched[0][i+1]
             else:
-                return -1
+                return "outside of school"
             #return i+1
         i+=1
-    return -1
+    return "outside of school"
