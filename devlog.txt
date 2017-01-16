@@ -1,62 +1,90 @@
 Seize the Day
 SquadUp DEVLOG
 
-felixR -- 2017-01-05 11:30--created the repo housing our design document, and along with other group members, finalized our design doc
+felixR -- 2017-01-05 11:30
+Created the repo housing our design document, and along with other group members, finalized our design doc
 
-kathyL -- 2017-01-07 13:55--added bootstrap, tested design of index and home page
+kathyL -- 2017-01-07 13:55
+Added bootstrap, tested design of index and home page
 
-felixR -- 2017-01-07 18:25--created the framework for the project: allows for the creation of accounts, logging in. Still needs significant refinement, there needs to be a way to create and assign id numbers. Additional issues: ocasionally pipes break, this is sporadic and I will look into it.
+felixR -- 2017-01-07 18:25
+Created the framework for the project: allows for the creation of accounts, logging in. Still needs significant refinement, there needs to be a way to create and assign id numbers. 
+Additional issues: ocasionally pipes break, this is sporadic and I will look into it.
 
-kathyL -- 2017-01-07 22:05--added the autofill in for updating location, tested converting image to text successfully --> located on my own repo for now. considering using google vision api
+kathyL -- 2017-01-07 22:05
+Added the autofill in for updating location, tested converting image to text successfully --> located on my own repo for now. considering using google vision api
 
-gioT -- 2017-01-09 07:23--added code to make new user id for each new user, created basic profile template, created the basic architecture for uploading one's schedule in app.py
+gioT -- 2017-01-09 07:23
+Added code to make new user id for each new user, created basic profile template, created the basic architecture for uploading one's schedule in app.py
 
-gioT -- 2017-01-09 13:43--fixed bug that occured when assigning new users a user id, tested, also fixed bug that occured when first user trying to register
+gioT -- 2017-01-09 13:43
+Fixed bug that occured when assigning new users a user id, tested, also fixed bug that occured when first user trying to register
 
-kathyL -- 2017-01-09 13:13:59--added uploading functions in app.py, created upload.html for testing ~~
+kathyL -- 2017-01-09 13:13:59
+Added uploading functions in app.py, created upload.html for testing ~~
 
-malickS -- 2017-01-09 18:01--Created main database
+malickS -- 2017-01-09 18:01
+Created main database
 
-gioT -- 2017-01-09 19:35--wrote function to add schedule to schedule table, created schedule table in users.db, still have to debug
+gioT -- 2017-01-09 19:35
+Wrote function to add schedule to schedule table, created schedule table in users.db, still have to debug
 
-felixR -- 2017-01-09 21:00--reconfigured the database, along with small aesthetic changes: i.e. the creation of user instructions and such.
+felixR -- 2017-01-09 21:00
+Reconfigured the database, along with small aesthetic changes: i.e. the creation of user instructions and such.
 
-felixR  2017-01-09 21:35--Fixed the until then non working mechanism meant to pull entered schedules and place them in the database, nw users can enter their schedules, issue still remaining: users can continuslly add schedules, ie there is no restriction on auser claiming that they have 10 schedules
+felixR  2017-01-09 21:35
+Fixed the until the mechanism meant to pull entered schedules and place them in the database, now users can enter their schedules, issue still remaining: users can continuslly add schedules, ie there is no restriction on auser claiming that they have 10 schedules
 
-malickS -- 2017-01-09 22:54--Wrote js functions for checking which current period it is
+malickS -- 2017-01-09 22:54
+Wrote js functions for checking which current period it is
 
-malickS --  2017-01-09 23:07--Wrote js functions that tell you what class you should be in
+malickS --  2017-01-09 23:07
+Wrote js functions that tell you what class you should be in
 
-gioT -- 2017-01-10 19:30--wrote function that takes inputed location and adds it to database, added code to allow for user to update their schedule
+gioT -- 2017-01-10 19:30
+Wrote function that takes inputed location and adds it to database, added code to allow for user to update their schedule
 
-kathyL -- 2017-01-10 00:34--added a return most updated version of user schedule in schedule.py to show in profile page. made upload button work--users now upload to static/images folder. also changed what gets display on profile page. if they already inputted a schedule, then schedule will show. if not, a form will show.
+kathyL -- 2017-01-10 00:34
+Added a return most updated version of user schedule in schedule.py to show in profile page. made upload button work--users now upload to static/images folder. also changed what gets display on profile page. if they already inputted a schedule, then schedule will show. if not, a form will show.
 
-kathyL -- 2017-01-10 7:50--made app able to process 2 different forms by selection of button
+kathyL -- 2017-01-10 7:50 
+Made app able to process 2 different forms by selection of button
 
-malickS -- 2017-01-10 12:14--fixed sessions so automatically logs u out if not logged in
+malickS -- 2017-01-10 12:14 
+Fixed sessions so automatically logs u out if not logged in
 
-will add dates later
+kathyL -- 2017-01-10 17:23 
+Made searching for other users work. if user is not in database, then msg will say that. display user's name on each schedule page. removed unnecessary text boxes
 
-kathyL -- 2017-01-10 17:23--made searching for other users work. if user is not in database, then msg will say that. display user's name on each schedule page. removed unnecessary text boxes
+kathyL -- 2016-01-10 23:40 
+Edited profile page so now u can go edit your schedule whenever you like. displayed users from users table on front page
 
-kathyL -- 2016-01-10 23:40--edited profile page so now u can go edit your schedule whenever you like. displayed users from users table on front page
+kathyL -- 2017-01-11 10:40 
+Made file for initialization of db files, added functions to add friend and check for friend status inside search file
 
-kathyL -- 2017-01-11 10:40--made file for initialization of db files, added functions to add friend and check for friend status inside search file
+malickS -- 2017-01-11 18:11 
+Added basic structure for changing your current location from in normal classes to out of stuy, still need python function for updating current location in database
 
-malickS -- 2017-01-11 18:11--Added basic structure for changing your current location from in normal classes to out of stuy, still need python function for updating current location in database
+kathyL -- 2017-01-12 00:27 
+Created friend table. adding friends implemented in app! displays if you have sent a friend request, received one, or are already friends on profile page
 
-kathyL -- 2017-01-12 00:27--created friend table. adding friends implemented in app! displays if you have sent a friend request, received one, or are already friends on profile page
+kathyL -- 2017-01-12 13:52 
+Finished friend fxnality
 
-kathyL -- 2017-01-12 13:52--finished friend fxnality
+kathyL -- 2017-01-12 19:32 
+Did the autofill in for the search bar ^_^
 
-kathyL -- 2017-01-12 19:32--did the autofill in for the search bar ^_^
+gioT -- 2017-01-12 20:15 
+Completed function that returns a list of your classmates
 
-gioT -- 2017-01-12 20:15--completed function that returns a list of your classmates
+gioT -- 2017-01-13 13:54 
+Used function that returns list of classmates to display people who have same class as you for a specific period
 
-gioT -- 2017-01-13 13:54--used function that returns list of classmates to display people who have same class as you for a specific period
+malickS -- 2017-01-13 18:03 
+Fixed time stamps
 
-malickS -- 2017-01-13 18:03--Fixed time stamps
+kathyL -- 2017-01-14 00:20 
+Made leave butoon work as intended, added page to view friends, fixed viewing classmates fxn
 
-kathyL -- 2017-01-14 00:20--made leave butoon work as intended, added page to view friends, fixed viewing classmates fxn
-
-felixR -- 2017-01-16 13:00--Added comments to all the fileis utils and app. Additionally streamlined some of the code, ie removed duplicate lines and in most of the files made the db name a global value, therby elimnating clutter
+felixR -- 2017-01-16 13:00 
+Added comments to all the fileis utils and app. Additionally streamlined some of the code, ie removed duplicate lines and in most of the files made the db name a global value, therby eliminating clutter
