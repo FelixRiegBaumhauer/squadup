@@ -13,7 +13,7 @@ gioT -- 2017-01-09 07:23--added code to make new user id for each new user, crea
 
 gioT -- 2017-01-09 13:43--fixed bug that occured when assigning new users a user id, tested, also fixed bug that occured when first user trying to register
 
-kathyL -- 2017-01-09 13:13:59-- added uploading functions in app.py, created upload.html for testing ~~
+kathyL -- 2017-01-09 13:13:59--added uploading functions in app.py, created upload.html for testing ~~
 
 gioT -- 2017-01-09 19:35--wrote function to add schedule to schedule table, created schedule table in users.db, still have to debug
 
@@ -21,7 +21,7 @@ felixR -- 2017-01-09 21:00--reconfigured the database, along with small aestheti
 
 felixR  2017-01-09 21:35--Fixed the until then non working mechanism meant to pull entered schedules and place them in the database, nw users can enter their schedules, issue still remaining: users can continuslly add schedules, ie there is no restriction on auser claiming that they have 10 schedules
 
-gioT -- 2017-01-10 19:30 -- wrote function that takes inputed location and adds it to database, added code to allow for user to update their schedule
+gioT -- 2017-01-10 19:30--wrote function that takes inputed location and adds it to database, added code to allow for user to update their schedule
 
 kathyL -- 2017-01-10 00:34--added a return most updated version of user schedule in schedule.py to show in profile page. made upload button work--users now upload to static/images folder. also changed what gets display on profile page. if they already inputted a schedule, then schedule will show. if not, a form will show.
 
@@ -38,18 +38,20 @@ will add dates later
 
 kathyL -- 2017-01-10 17:23--made searching for other users work. if user is not in database, then msg will say that. display user's name on each schedule page. removed unnecessary text boxes
 
-kathyL --2016-01-10 23:40--edited profile page so now u can go edit your schedule whenever you like. displayed users from users table on front page
+kathyL -- 2016-01-10 23:40--edited profile page so now u can go edit your schedule whenever you like. displayed users from users table on front page
 
-kathyL --2017-01-11 10:40--made file for initialization of db files, added functions to add friend and check for friend status inside search file
+kathyL -- 2017-01-11 10:40--made file for initialization of db files, added functions to add friend and check for friend status inside search file
 
-kathyL --2017-01-12 00:27--created friend table. adding friends implemented in app! displays if you have sent a friend request, received one, or are already friends on profile page
+kathyL -- 2017-01-12 00:27--created friend table. adding friends implemented in app! displays if you have sent a friend request, received one, or are already friends on profile page
 
-kathyL --2017-01-12 13:52--finished friend fxnality
+kathyL -- 2017-01-12 13:52--finished friend fxnality
 
-kathyL --2017-01-12 19:32--did the autofill in for the search bar ^_^
+kathyL -- 2017-01-12 19:32--did the autofill in for the search bar ^_^
 
 gioT -- 2017-01-12 20:15--completed function that returns a list of your classmates
 
 gioT -- 2017-01-13 13:54--used function that returns list of classmates to display people who have same class as you for a specific period
 
-kathyL --2017-01-14 00:20--made leave butoon work as intended, added page to view friends, fixed viewing classmates fxn
+kathyL -- 2017-01-14 00:20--made leave butoon work as intended, added page to view friends, fixed viewing classmates fxn
+
+felixR -- 2017-01-16 13:00--Added comments to all the fileis utils and app. Additionally streamlined some of the code, ie removed duplicate lines and in most of the files made the db name a global value, therby elimnating clutter
