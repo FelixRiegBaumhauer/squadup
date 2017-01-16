@@ -3,11 +3,13 @@
 import sqlite3
 from time import gmtime, localtime, strftime
 
+#the db location
+f="data/users.db"
 
 
 #return users who have a current location
 def retUsers():
-    db=sqlite3.connect("data/users.db")
+    db=sqlite3.connect(f)
     c=db.cursor()
     c.execute('SELECT * FROM users WHERE time != "";')
     return c.fetchall()[::-1]
@@ -16,7 +18,7 @@ def retUsers():
 
 #return all users who have registered
 def retAllUsers():
-    db=sqlite3.connect("data/users.db")
+    db=sqlite3.connect(f)
     c=db.cursor()
     c.execute('SELECT * FROM users;')
     return c.fetchall()[::-1]
@@ -24,7 +26,7 @@ def retAllUsers():
 #the function that updates the entry in the db that correspondes to the users location
 #simplly said it is the backend fxn that updates loactions
 def updateLoc(loc, user):
-    db=sqlite3.connect("data/users.db")
+    db=sqlite3.connect(f)
     c=db.cursor()
     c.execute('UPDATE users SET location = "'+loc+'" WHERE username="'+user+'";')
 
