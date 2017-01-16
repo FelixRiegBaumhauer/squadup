@@ -3,9 +3,16 @@
 
 
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash, jsonify
+
 import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate
+
 from werkzeug.utils import secure_filename
+
 from time import gmtime, strftime
+
+
+
+
 
 app = Flask(__name__)
 
@@ -18,6 +25,10 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
+'''
+The root, has to decide if it wants to redirect you to the login or if you have the appropriate cookie it will let you in
+'''
 @app.route("/", methods=["GET","POST"])
 def main():
     if(secret in session):
@@ -48,6 +59,9 @@ def main():
     return render_template("login.html")
 
 
+'''
+the login route, makes sure that your entered info can be checked so you can be let in
+'''
 @app.route("/login", methods=["POST"])
 def verify_login():
     given_user = request.form["username"]
@@ -66,7 +80,9 @@ def verify_login():
     return render_template('login.html')
 
 
-
+'''
+The logout route, pops your session, and takes you out of the site
+'''
 @app.route("/logout")
 def log_user_out():
     print session
@@ -78,7 +94,9 @@ def log_user_out():
 
 
 
-
+'''
+renders the signup page
+'''
 @app.route("/signup_page")
 def present_signup():
     return render_template('signup.html')
@@ -86,7 +104,9 @@ def present_signup():
 
 
 
-
+'''
+the route that either sends you to the login page after a successfull signup, or keeps you at the signup page if you failed
+'''
 @app.route("/signup", methods=["POST"])
 def verify_signup():
     given_user = request.form["username"]
@@ -109,7 +129,10 @@ def verify_signup():
     return redirect(url_for('present_signup'))
 
 
-
+'''
+displays the profile site
+uses all these complex function class to extract information that is either shown or is needed in the presentation of the profile site
+'''
 @app.route('/profile', methods=['POST','GET'])
 def dispProfile():
     if(secret not in session):
@@ -142,7 +165,10 @@ def dispProfile():
     return render_template("profile.html", username=session[secret], sch=zip(L[1:], classmates), show=show, own=True, name=session[secret],location = loc,status=status)
 
 
-
+'''
+This is the route used by the search functions
+If you search, the serached users profile is shown by means of this method
+'''
 @app.route('/profile/<query>', methods=['POST','GET'])
 def dispFriendProfile(query):
     if len(utils.search.searchUsers(query))<1:
@@ -173,6 +199,10 @@ def dispFriendProfile(query):
     friend_status = utils.search.is_friends(session[secret], query)
     return render_template("profile.html", username=session[secret], sch=L[1:], show=show, name=query, location = loc, status=friend_status)
 
+
+'''
+This is the schedule route, which is used in harvesting the inputs to be used in a schedule
+'''
 @app.route('/schedule', methods=['POST'])
 def inputSchedule():
     schdl=[' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
@@ -183,12 +213,19 @@ def inputSchedule():
     utils.schedule.createSchedule(schdl,session[secret])
     return redirect(url_for('main'))
 
+
+'''
+this route is used to faciliate the friend button
+'''
 @app.route('/friends', methods=['GET', 'POST'])
 def friends():
     friends = utils.search.retFriends(session[secret])
     return render_template("friends.html", friends=friends)
 
 
+'''
+this route is used by the search functionallity
+'''
 @app.route("/search/<string:box>")
 def process(box):
     query = request.args.get('query')
@@ -204,16 +241,26 @@ def process(box):
         return jsonify({"suggestions":suggestions})
 
 
+'''
+This is used by the until now not in use file upload functionallity
+SHOULD BE MOVED TO THE utils folder
+'''
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+'''
+This is used by the until now not in use file upload functionallity
+'''
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
 
+'''
+used by the upload functionallity
+'''
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method=='GET':
@@ -235,7 +282,11 @@ def upload_file():
                                     filename=filename))
 
 
+'''
+DEBUG and RUN
+'''
 
+        
 if __name__ == '__main__':
     app.debug=True
     app.run()
