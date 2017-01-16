@@ -1,5 +1,9 @@
 import sqlite3
 
+'''
+This fxn uses a querry to search all of our existing users
+This allows the serch functionallity to work
+'''
 def searchUsers(query):
     db=sqlite3.connect("data/users.db")
     c=db.cursor()
@@ -19,6 +23,7 @@ def searchUsers(query):
 '''
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Friending user functions
+This fxn updates the db friend table
 '''
 
 #to send or accept friend request
@@ -29,7 +34,11 @@ def sa_friend(q1, q2):
     c.execute('INSERT INTO friend VALUES(' + "'" + q1+"'," + "'"+q2 + "');")
     db.commit()
     db.close()
-    
+
+
+'''
+This fxn is used to determine the friendship status of two users
+'''    
 # returns 0 if user 1 sent friend request to user 2
 # returns 1 if user 2 sent friend request to user 1
 # return 2 if both users have added each other !
@@ -50,7 +59,10 @@ def is_friends(q1, q2):
     if len(true1) == 0 and len(true2) == 0:
         return 3
 
-
+    
+'''
+This fxn returns a list of friends for a given user
+'''
 def retFriends(user):
     db=sqlite3.connect("data/users.db")
     c=db.cursor()

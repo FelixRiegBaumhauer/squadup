@@ -1,9 +1,15 @@
 import hashlib, sqlite3
 
-#faciliates logins
+#the db location
+f="data/users.db"
+
+
+'''
+This fxn uses the given username and password to confirm if the info is in our db
+If it is, and everything matches up, we permit the user to enter the site
+'''
 def login(g_username, g_password):
     #===========OPENING THE DB=============
-    f="data/users.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     #=================================================
@@ -29,7 +35,10 @@ def login(g_username, g_password):
     #NO LOGIN FOR YOU
     return False
 
-
+'''
+Makes entries in the db if all the given info makes sense:
+i.e, if the 2 passwords match and the username is not allready taken
+'''
 def make_account(g_username, g_password1, g_password2):
     
     if(g_password1 != g_password2):
@@ -39,7 +48,7 @@ def make_account(g_username, g_password1, g_password2):
 
     
     #===========OPENING THE DB=============
-    f="data/users.db"
+    #f="data/users.db"
     db = sqlite3.connect(f);
     c = db.cursor()
     #=================================================

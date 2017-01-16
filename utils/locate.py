@@ -1,8 +1,9 @@
-#THIS IS WHERE THE LOACTION FXNS AND SO ON WILL GO
-#making this show all locations for now
+#THIS IS WHERE THE LOCATION FXNS AND SO ON WILL GO
 
 import sqlite3
 from time import gmtime, localtime, strftime
+
+
 
 #return users who have a current location
 def retUsers():
@@ -20,7 +21,8 @@ def retAllUsers():
     c.execute('SELECT * FROM users;')
     return c.fetchall()[::-1]
 
-
+#the function that updates the entry in the db that correspondes to the users location
+#simplly said it is the backend fxn that updates loactions
 def updateLoc(loc, user):
     db=sqlite3.connect("data/users.db")
     c=db.cursor()

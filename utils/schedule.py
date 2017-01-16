@@ -2,7 +2,11 @@ import sqlite3
 
 from datetime import datetime
 
-
+'''
+this fxn updates the db enteries corresponding to their schedule
+a list of locations (schedule) is passed in
+and the fxn removes the old db entry, and makes a new one that is now relevant
+'''
 def createSchedule(schedule, userID):
     db=sqlite3.connect("data/users.db")
     c=db.cursor()
@@ -30,6 +34,11 @@ def retCurrentLocation(user):
     c.execute('''SELECT location FROM users WHERE username==''' +"'" +str(user)+"'" +';')
     return c.fetchall()
 
+
+
+'''
+This function finds users that have the same classes as another user 
+'''
 def retClassmates(user):
     db=sqlite3.connect("data/users.db")
     c=db.cursor()
@@ -55,6 +64,9 @@ def retClassmates(user):
         classes.append(classmates)
     return classes
 
+'''
+This fxn returns the current period
+'''
 def getPeriod(user):
     Rperiod = [
         [460,521],

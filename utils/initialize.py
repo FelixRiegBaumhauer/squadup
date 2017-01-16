@@ -1,6 +1,13 @@
 import sqlite3
 
+#the location of the db
 f = "data/users.db"
+
+'''
+This only exits for initializing, for some reason te database does not exist and we need to make it. 
+This file should not be used by the site, as it means that we somehow lost all the users ino that was stored in the db
+'''
+
 
 db = sqlite3.connect(f) #open if f exists, otherwise create
 c = db.cursor()    #facilitate db ops
