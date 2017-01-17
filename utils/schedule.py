@@ -30,7 +30,9 @@ def retSchedule(user):
     db=sqlite3.connect(f)
     c=db.cursor()
     c.execute('''SELECT * FROM schedule WHERE userID==''' +"'" +str(user)+"'" +';')
-    return c.fetchall()
+    hi=c.fetchall()
+    print hi
+    return hi
 
 def retCurrentLocation(user):
     db=sqlite3.connect("data/users.db")
@@ -59,13 +61,15 @@ def retClassmates(user):
         usersClasses=c.fetchall()
         #print usersClasses, '\n\n'
         #print usersClasses
+        classmates=[]
         for people in usersClasses:
-            classmates=[]
+            print people
             if(yourClass==people[1] and people[0]!=user):
                 classmates.append(people[0])
-                #print yourClass, people[1], people[0]
+                print yourClass, people[1], people[0]
         pd+=1
         classes.append(classmates)
+    print classes
     return classes
 
 '''
