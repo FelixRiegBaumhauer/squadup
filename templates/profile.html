@@ -132,7 +132,7 @@ Post Your Schedule
 {{name}}'s Schedule<br>
 </h2>
 <ul>
-{% for pd in sch[1:] %}
+{% for pd in sch[:] %}
     <li>{{ pd }}   </li>
  
 {% endfor %}
