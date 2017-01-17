@@ -88,3 +88,6 @@ Made leave butoon work as intended, added page to view friends, fixed viewing cl
 
 felixR -- 2017-01-16 13:00 
 Added comments to all the fileis utils and app. Additionally streamlined some of the code, ie removed duplicate lines and in most of the files made the db name a global value, therby eliminating clutter
+
+gioT -- 2017-01-17 13:55
+Fixed function showing friends, shows more than one person per class, updates when schdule changes
