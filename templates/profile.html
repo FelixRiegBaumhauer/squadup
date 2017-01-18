@@ -61,6 +61,8 @@ Friend Request Sent
 <form method="POST"> Accept friend request >
 <input type="submit" value="add_friend" name="submit">
 </form>
+{% elif status == -1 %}
+
 {% else %}
 Friends
 {% endif %}

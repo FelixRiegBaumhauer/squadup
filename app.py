@@ -220,7 +220,7 @@ def friends():
     searchFriends = utils.search.retFriends(session[secret])
     friends = searchFriends[0]
     friendsRequested = searchFriends[1]
-    return render_template("friends.html", friends=friends, friendsR=friendsRequested)
+    return render_template("friends.html", username=session[secret], friends=friends, friendsR=friendsRequested)
 
 #@app.route("/idek/<imgname>")
 def idek(imgname):
