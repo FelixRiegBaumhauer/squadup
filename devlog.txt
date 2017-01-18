@@ -94,3 +94,6 @@ Fixed function showing friends, shows more than one person per class, updates wh
 
 kathyL -- 2017-01-17 23:26
 Display friend requests, make edit schedule function already filled in w previous schedule, better UX
+
+kathyL -- 2017-01-18 01:48
+could not install pytesser correctly on digital ocean despite multiple tries. sadly, will use dragile api, which has some errors at times and will not work correctly unless image is cropped correctly. added as fxn to app.py

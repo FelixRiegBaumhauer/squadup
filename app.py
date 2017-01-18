@@ -4,7 +4,7 @@
 
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash, jsonify
 
-import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate
+import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate, utils.img2text
 
 from werkzeug.utils import secure_filename
 
@@ -222,6 +222,17 @@ def friends():
     friendsRequested = searchFriends[1]
     return render_template("friends.html", friends=friends, friendsR=friendsRequested)
 
+#@app.route("/idek/<imgname>")
+def idek(imgname):
+    #test_file = ocr_space_file(filename='example_image.png', language='pol')
+    url = utils.img2text.ocr_space_file(filename='./static/images/' + imgname, language='eng')#['ParsedResults'][0]#['ParsedText']
+    url = url[url.find('ParsedText')+13:url.find('"ErrorMessage')-1]
+    url=url.replace(r"\r\n", r"")
+    url=url.replace('...','<br>')
+    #url = url[url.find('Room')+4:]
+    pds = url[url.find('Period')+8:url.find("Room")-1]
+    rooms=url[url.find("Room")+4:-1]
+    return [pds, rooms]
 
 '''
 this route is used by the search functionallity
@@ -278,6 +289,20 @@ def upload_file():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            info = idek(filename)
+            pd = info[0].split()[1:]
+            rooms = info[1].split()
+            rooms = rooms[1:]
+            #print rooms
+            x=1
+            while(x<11):
+                #print x
+                if str(x) not in pd:
+                    rooms.insert(x,'free')
+                x+=1
+            utils.schedule.createSchedule(rooms[1:],session[secret])
+            return redirect(url_for('main'))
+
             return redirect(url_for('uploaded_file',
                                     filename=filename))
 
