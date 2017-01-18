@@ -9,4 +9,13 @@
 </li>
 {% endfor %}
 </ul>
+<hr>
+<h2>Friend Requests </h2>
+{% for b in friendsR %}
+<li><a href="/profile/{{b}}"> {{b}} </a>
+</li>
+{% endfor %}
+</ul>
+<br>
+<br>
 {% endblock %}

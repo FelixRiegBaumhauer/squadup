@@ -77,34 +77,34 @@ Post Your Schedule
 </h3>
 <form action="/schedule" method="POST">
   Period 1
-  <input type="text" name="pd1" value="">
+  <input type="text" name="pd1" value="{{sch[0]}}">
   <br>
   Period 2
-  <input type="text" name="pd2" value="">
+  <input type="text" name="pd2" value="{{sch[1]}}">
   <br>
   Period 3
-  <input type="text" name="pd3" value="">
+  <input type="text" name="pd3" value="{{sch[2]}}">
   <br>
   Period 4
-  <input type="text" name="pd4" value="">
+  <input type="text" name="pd4" value="{{sch[3]}}">
   <br>
   Period 5
-  <input type="text" name="pd5" value="">
+  <input type="text" name="pd5" value="{{sch[4]}}">
   <br>
   Period 6
-  <input type="text" name="pd6" value="">
+  <input type="text" name="pd6" value="{{sch[5]}}">
   <br>
   Period 7
-  <input type="text" name="pd7" value="">
+  <input type="text" name="pd7" value="{{sch[6]}}">
   <br>
   Period 8
-  <input type="text" name="pd8" value="">
+  <input type="text" name="pd8" value="{{sch[7]}}">
   <br>
   Period 9
-  <input type="text" name="pd9" value="">
+  <input type="text" name="pd9" value="{{sch[8]}}">
   <br>
   Period 10
-  <input type="text" name="pd10" value="">
+  <input type="text" name="pd10" value="{{sch[9]}}">
   <br><br>
   <input type="submit" value="Submit">
 </form>
@@ -134,7 +134,7 @@ Post Your Schedule
 <ul>
 {% for pd in sch[:] %}
     <li>{{ pd }}   </li>
- 
+
 {% endfor %}
 </ul>
 

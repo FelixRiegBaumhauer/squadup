@@ -8,7 +8,7 @@ kathyL -- 2017-01-07 13:55
 Added bootstrap, tested design of index and home page
 
 felixR -- 2017-01-07 18:25
-Created the framework for the project: allows for the creation of accounts, logging in. Still needs significant refinement, there needs to be a way to create and assign id numbers. 
+Created the framework for the project: allows for the creation of accounts, logging in. Still needs significant refinement, there needs to be a way to create and assign id numbers.
 Additional issues: ocasionally pipes break, this is sporadic and I will look into it.
 
 kathyL -- 2017-01-07 22:05
@@ -47,47 +47,50 @@ Wrote function that takes inputed location and adds it to database, added code t
 kathyL -- 2017-01-10 00:34
 Added a return most updated version of user schedule in schedule.py to show in profile page. made upload button work--users now upload to static/images folder. also changed what gets display on profile page. if they already inputted a schedule, then schedule will show. if not, a form will show.
 
-kathyL -- 2017-01-10 7:50 
+kathyL -- 2017-01-10 7:50
 Made app able to process 2 different forms by selection of button
 
-malickS -- 2017-01-10 12:14 
+malickS -- 2017-01-10 12:14
 Fixed sessions so automatically logs u out if not logged in
 
-kathyL -- 2017-01-10 17:23 
+kathyL -- 2017-01-10 17:23
 Made searching for other users work. if user is not in database, then msg will say that. display user's name on each schedule page. removed unnecessary text boxes
 
-kathyL -- 2016-01-10 23:40 
+kathyL -- 2016-01-10 23:40
 Edited profile page so now u can go edit your schedule whenever you like. displayed users from users table on front page
 
-kathyL -- 2017-01-11 10:40 
+kathyL -- 2017-01-11 10:40
 Made file for initialization of db files, added functions to add friend and check for friend status inside search file
 
-malickS -- 2017-01-11 18:11 
+malickS -- 2017-01-11 18:11
 Added basic structure for changing your current location from in normal classes to out of stuy, still need python function for updating current location in database
 
-kathyL -- 2017-01-12 00:27 
+kathyL -- 2017-01-12 00:27
 Created friend table. adding friends implemented in app! displays if you have sent a friend request, received one, or are already friends on profile page
 
-kathyL -- 2017-01-12 13:52 
+kathyL -- 2017-01-12 13:52
 Finished friend fxnality
 
-kathyL -- 2017-01-12 19:32 
+kathyL -- 2017-01-12 19:32
 Did the autofill in for the search bar ^_^
 
-gioT -- 2017-01-12 20:15 
+gioT -- 2017-01-12 20:15
 Completed function that returns a list of your classmates
 
-gioT -- 2017-01-13 13:54 
+gioT -- 2017-01-13 13:54
 Used function that returns list of classmates to display people who have same class as you for a specific period
 
-malickS -- 2017-01-13 18:03 
+malickS -- 2017-01-13 18:03
 Fixed time stamps
 
-kathyL -- 2017-01-14 00:20 
+kathyL -- 2017-01-14 00:20
 Made leave butoon work as intended, added page to view friends, fixed viewing classmates fxn
 
-felixR -- 2017-01-16 13:00 
+felixR -- 2017-01-16 13:00
 Added comments to all the fileis utils and app. Additionally streamlined some of the code, ie removed duplicate lines and in most of the files made the db name a global value, therby eliminating clutter
 
 gioT -- 2017-01-17 13:55
 Fixed function showing friends, shows more than one person per class, updates when schdule changes
+
+kathyL -- 2017-01-17 23:26
+Display friend requests, make edit schedule function already filled in w previous schedule, better UX

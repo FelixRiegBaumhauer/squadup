@@ -84,6 +84,7 @@ def verify_login():
 The logout route, pops your session, and takes you out of the site
 '''
 @app.route("/logout")
+@app.route("/logout/")
 def log_user_out():
     print session
     session.pop(secret)
@@ -146,23 +147,20 @@ def dispProfile():
         loc = loc[0][0]
     except:
         loc = ''
+    if len(sched) != 0:     #listify schedule
+        sched = sched[0]
+        for a in sched:
+            L.append(a)
+
     if request.method=="POST":
         if request.form["submit"]=="search":
             q = request.form['search']
             return redirect("/profile/" + q)
         if request.form["submit"]=="edit":
-            show = False
             status = -2
-            return render_template("profile.html", username=session[secret], sch=L[1:], show=show, own=True, name=session[secret],location = loc,status=status)
+            return render_template("profile.html", username=session[secret], sch=L[1:], own=True, name=session[secret],location = loc,status=status)
     status = -1
-    if len(sched) != 0:     #if GET request
-        show=True
-        sched = sched[0]
-        for a in sched:
-            L.append(a)
-    else:
-        show=False
-    return render_template("profile.html", username=session[secret], sch=zip(L[1:], classmates), show=show, own=True, name=session[secret],location = loc,status=status)
+    return render_template("profile.html", username=session[secret], sch=zip(L[1:], classmates), own=True, name=session[secret],location = loc,status=status)
 
 
 '''
@@ -219,8 +217,10 @@ this route is used to faciliate the friend button
 '''
 @app.route('/friends', methods=['GET', 'POST'])
 def friends():
-    friends = utils.search.retFriends(session[secret])
-    return render_template("friends.html", friends=friends)
+    searchFriends = utils.search.retFriends(session[secret])
+    friends = searchFriends[0]
+    friendsRequested = searchFriends[1]
+    return render_template("friends.html", friends=friends, friendsR=friendsRequested)
 
 
 '''
@@ -286,7 +286,7 @@ def upload_file():
 DEBUG and RUN
 '''
 
-        
+
 if __name__ == '__main__':
     app.debug=True
     app.run()

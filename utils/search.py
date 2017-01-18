@@ -18,7 +18,7 @@ def searchUsers(query):
     db.close()
 
     L=[]
-    
+
     for users in hold:
         if(query in users[0]):
             L.append(users[0])
@@ -42,7 +42,7 @@ def sa_friend(q1, q2):
 
 '''
 This fxn is used to determine the friendship status of two users
-'''    
+'''
 # returns 0 if user 1 sent friend request to user 2
 # returns 1 if user 2 sent friend request to user 1
 # return 2 if both users have added each other !
@@ -63,18 +63,22 @@ def is_friends(q1, q2):
     if len(true1) == 0 and len(true2) == 0:
         return 3
 
-    
+
 '''
 This fxn returns a list of friends for a given user
 '''
 def retFriends(user):
     db=sqlite3.connect(f)
     c=db.cursor()
-    c.execute("SELECT * FROM friend where user1 ==" + "'" + user +  "';")
+    #c.execute("SELECT * FROM friend where user1 ==" + "'" + user +  "';")
+    c.execute("SELECT * FROM friend;")
     tmp = c.fetchall()
     friendList = []
+    friendRequestedList = []
     for a in tmp:
-        if is_friends(a[0], a[1]):
-            friendList.append(a[1])
-    return friendList
-    
+        #print a[0], a[1], is_friends(a[0],a[1])
+        if a[1]==user and is_friends(a[0], a[1])==2:
+            friendList.append(a[0])
+        elif a[1]==user and is_friends(a[0],a[1])==0:
+            friendRequestedList.append(a[0])
+    return [friendList, friendRequestedList]
