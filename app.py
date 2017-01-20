@@ -4,7 +4,7 @@
 
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash, jsonify
 
-import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate, utils.img2text
+import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate, utils.img2text, utils.display
 
 from werkzeug.utils import secure_filename
 
@@ -79,6 +79,15 @@ def verify_login():
 
     return render_template('login.html')
 
+@app.route("/display")
+def display():
+    return render_template('display.html')
+
+@app.route("/show",methods=['GET', 'POST'])
+def printit():
+        feed = utils.locate.retUsers()
+        feed = sorted(feed, key=lambda x: x[4], reverse=True) # sort users by time updated
+        return render_template('newsfeed.html',news=feed)  
 
 '''
 The logout route, pops your session, and takes you out of the site
