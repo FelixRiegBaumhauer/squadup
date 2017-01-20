@@ -27,7 +27,7 @@
 
 
 
-	<body>
+<body onload="getLares();">
 <!-- header -->
 <div id="top-nav" class="navbar navbar-inverse navbar-static-top" style="background-color:white">
     <div class="container-fluid">
@@ -106,6 +106,7 @@
 
 
 						</form>
+                <div id = "newsfeed">
 						<hr>
 	{% for a in news %}
 		<a href="/profile/{{a[1]}}"> {{a[1]}} </a> was at
@@ -126,7 +127,7 @@
 
 
 							</div>
-							<!--/col-->
+							<!--/col--></div>
 							<div class="col-sm-3 col-sm-push-3">
 
 							      <div id="map" style="width: 300px; height: 600px;"></div>
@@ -178,6 +179,29 @@
     <input type="submit" value="logout" />
 </p1>
 
+    <script>
+function pulldata() {
+$.ajax("/show", {
+            type: 'POST',
+            success: function (response) {
+                
+                console.log("working");
+                document.getElementById("newsfeed").innerHTML = response;
+                
+            }
+
+        });
+}
+    
+pulldata();
+var nIntervId;
+
+
+function getLares() {
+      nIntervId = setInterval(pulldata, 10000);
+}
+ 
+</script>
 
 
 
@@ -185,5 +209,7 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script src="/static/js/bootstrap.min.js"></script>
 		<script src="/static/js/scripts.js"></script>
+    
+    
 	</body>
 </html>
