@@ -31,7 +31,6 @@ def retSchedule(user):
     c=db.cursor()
     c.execute('''SELECT * FROM schedule WHERE userID==''' +"'" +str(user)+"'" +';')
     hi=c.fetchall()
-    print hi
     return hi
 
 def retCurrentLocation(user):
@@ -63,13 +62,10 @@ def retClassmates(user):
         #print usersClasses
         classmates=[]
         for people in usersClasses:
-            print people
             if(yourClass==people[1] and people[0]!=user):
                 classmates.append(people[0])
-                print yourClass, people[1], people[0]
         pd+=1
         classes.append(classmates)
-    print classes
     return classes
 
 '''
