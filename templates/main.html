@@ -79,70 +79,93 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div class="col-sm-7  col-sm-push-3" >
+
+			<div class="col-sm-5 col-sm-push-1" >
 
 						  {% block content %}
 
-<!--
-<form method="POST">
-    <select name="current" onchange = optionchanged()>
-        <option selected disabled>-- Select Current Location --</option>
-        <option value="inschool">In Normal Stuy Class</option>
-        <option value="out">Outside of stuy</option>
-     </select>
-     <input type="submit" onclick="getNumber(this.form)" value="Update" name="button">
-		<input type="submit" value="Update" name="submit"> 
-</form>
--->
 {% if leave %}
 <form method="POST">
-    	<input type="submit" value="Leave" name="submit">
+		<input type="submit" value="Leave" name="submit">
 </form>
 {% endif %}
 
 
-	<form method="POST">
-								<br>
-								<textarea rows="3" cols="70" id="origin" name = "location" placeholder="Update your location"></textarea>
-								<br>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
-    <script type="text/javascript">
-      var input1 = document.getElementById('origin');
-      var options = {componentRestrictions: {country: 'us'}};
-      new google.maps.places.Autocomplete(input1, options);
-    </script>
+<form method="POST">
+							<br>
+							<textarea rows="3" cols="70" id="origin" name = "location" placeholder="Update your location"></textarea>
+							<br>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+	<script type="text/javascript">
+		var input1 = document.getElementById('origin');
+		var options = {componentRestrictions: {country: 'us'}};
+		new google.maps.places.Autocomplete(input1, options);
+	</script>
 
-		<input type="submit" name="submit" value="post"  class="btn btn-primary">
-
-
-							</form>
-							<hr>
-		{% for a in news %}
-			<a href="/profile/{{a[1]}}"> {{a[1]}} </a> was at
-				{% if a[3]=='' %}
-					unknown
-				{% else %}
-				{{a[3]}}
-				{% endif %}
-
-				since
-				{% if a[4]=='' %}
-					who knows
-				{% else %}
-
-		{{a[4]}} {% endif %} <hr>
-		{% endfor %}
+	<input type="submit" name="submit" value="post"  class="btn btn-primary">
 
 
-                </div>
-                <!--/col-->
-                </div>
-                <!--/col-span-6-->
-            </div>
-            <!--/row-->
-            <hr>
-        <!--/col-span-9-->
-    <div>
+						</form>
+						<hr>
+	{% for a in news %}
+		<a href="/profile/{{a[1]}}"> {{a[1]}} </a> was at
+			{% if a[3]=='' %}
+				unknown
+			{% else %}
+			{{a[3]}}
+			{% endif %}
+
+			since
+			{% if a[4]=='' %}
+				who knows
+			{% else %}
+
+	{{a[4]}} <hr>
+{% endif %}
+	{% endfor %}
+
+
+							</div>
+							<!--/col-->
+							<div class="col-sm-3 col-sm-push-3">
+
+							      <div id="map" style="width: 300px; height: 600px;"></div>
+
+							      <script type="text/javascript">
+							        //var locations = {{info|safe}};
+							        var locations = {{coords | safe}};
+							        var map = new google.maps.Map(document.getElementById('map'), {
+							          zoom: 12,
+							          center: new google.maps.LatLng(40.7179464, -74.0139052),
+							          mapTypeId: google.maps.MapTypeId.ROADMAP
+							        });
+							        var infowindow = new google.maps.InfoWindow();
+							        var marker, icon, i, iconlist;
+											iconlist = {{pfp | safe}}
+
+							        for (i = 0; i < locations.length; i++) {
+												icon = {
+    url: iconlist[i], // url
+    scaledSize: new google.maps.Size(40, 40), // scaled size
+    origin: new google.maps.Point(0,0), // origin
+    anchor: new google.maps.Point(0, 0) // anchor
+};
+							          marker = new google.maps.Marker({
+							            position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+							            map: map,
+												 	icon: icon
+
+							          });
+							          google.maps.event.addListener(marker, 'click', (function(marker, i) {
+							            return function() {
+							              infowindow.setContent(locations[i][0]);
+							              infowindow.open(map, marker);
+							            }
+							          })(marker, i));
+							        }
+							</script>
+							</div>				 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
 </div>
 <!-- /Main -->
 	  {% endblock %}

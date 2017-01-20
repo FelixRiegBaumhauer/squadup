@@ -43,7 +43,17 @@ def main():
                 utils.locate.updateLoc(str(pd), session[secret])
             else:
                 leave=True
-            return render_template('main.html',username=session[secret],news=feed,leave=leave)
+            #return redirect('display')
+            mapDeets = utils.locate.maptesting(session[secret])
+            info = []
+            friends = utils.search.retFriends(session[secret])[0]
+            for f in friends:
+                file_path = './static/images/' + str(f) + '.png'
+                print file_path
+                if os.path.exists(file_path):
+                    info.append(file_path)
+            print info
+            return render_template('main.html',username=session[secret],news=feed,leave=leave, lat=mapDeets[0], lon = mapDeets[1], coords=mapDeets[2], pfp=info)
         else:
             if request.form["submit"]=="post":
                 utils.locate.updateLoc(request.form["location"], session[secret])
@@ -87,7 +97,7 @@ def display():
 def printit():
         feed = utils.locate.retUsers()
         feed = sorted(feed, key=lambda x: x[4], reverse=True) # sort users by time updated
-        return render_template('newsfeed.html',news=feed)  
+        return render_template('newsfeed.html',news=feed)
 
 '''
 The logout route, pops your session, and takes you out of the site
@@ -167,7 +177,7 @@ def dispProfile():
             return redirect("/profile/" + q)
         if request.form["submit"]=="edit":
             status = -2
-            return render_template("profile.html", username=session[secret], sch=L[1:], own=True, name=session[secret],location = loc,status=status)
+            return render_template("profile.html", username=session[secret], sch=L[1:], own=True, name=session[secret],location = loc,status=status, pfp='./static/images/'+session[secret]+'.png')
     status = -1
     return render_template("profile.html", username=session[secret], sch=zip(L[1:], classmates), own=True, name=session[secret],location = loc,status=status, pfp='./static/images/'+session[secret]+'.png')
 
@@ -204,7 +214,7 @@ def dispFriendProfile(query):
     else:
         show=True
     friend_status = utils.search.is_friends(session[secret], query)
-    return render_template("profile.html", username=session[secret], sch=L[1:], show=show, name=query, location = loc, status=friend_status)
+    return render_template("profile.html", username=session[secret], sch=L[1:], show=show, name=query, location = loc, status=friend_status, pfp='/static/images/' + query + '.png')
 
 
 '''
@@ -327,23 +337,6 @@ def upload_PFP():
                 os.remove(UPLOAD_FOLDER + session[secret]+'.png')
                 os.rename(UPLOAD_FOLDER + filename, UPLOAD_FOLDER+session[secret]+'.png')
             return redirect(url_for('main'))
-
-@app.route('/maptesting')
-def maptesting():
-    friends = utils.search.retFriends(session[secret])[0]
-    coords = []
-    lat=''
-    lon=''
-    for f in friends:
-        currLoc = str(utils.locate.retCurrentLocation(f)[0][0])
-        print currLoc
-        if len(currLoc) > 4:
-            #print utils.locate.geo_loc('345+Chambers+Street+New+York+10282')
-            latlon = utils.locate.geo_loc(currLoc.replace(',',' ').replace(' ','+'))
-            lat = latlon['lat']
-            lon = latlon['lng']
-            coords.append([currLoc,lat,lon])
-    return render_template("maptesting.html",lat=lat,lon=lon, coords=coords)
 
 '''
 DEBUG and RUN

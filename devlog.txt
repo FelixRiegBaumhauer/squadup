@@ -97,3 +97,6 @@ Display friend requests, make edit schedule function already filled in w previou
 
 kathyL -- 2017-01-18 01:48
 could not install pytesser correctly on digital ocean despite multiple tries. sadly, will use dragile api, which has some errors at times and will not work correctly unless image is cropped correctly. added as fxn to app.py
+
+kathyL -- 2017-01-19 23:29
+added profile pics functionality -- every image will be named after the user -- when the user adds a new image it replaces the old one. show where friends are on map. show all images of friends on map based on current location! tried to incorporate sachal's ajax but commited to different branch bc unstableness w merge

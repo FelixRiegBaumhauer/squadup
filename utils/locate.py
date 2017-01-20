@@ -1,6 +1,6 @@
 #THIS IS WHERE THE LOCATION FXNS AND SO ON WILL GO
 
-import sqlite3, urllib, urllib2, json
+import sqlite3, urllib, urllib2, json, utils.search
 from time import gmtime, localtime, strftime
 
 #the db location
@@ -43,6 +43,23 @@ def retCurrentLocation(user):
     c=db.cursor()
     c.execute('''SELECT location FROM users WHERE username==''' +"'" +str(user)+"'" +';')
     return c.fetchall()
+
+def maptesting(user):
+    friends = utils.search.retFriends(user)[0]
+    coords = []
+    lat=''
+    lon=''
+    for f in friends:
+        currLoc = str(retCurrentLocation(f)[0][0])
+        #print currLoc
+        if len(currLoc) > 4:
+            #print utils.locate.geo_loc('345+Chambers+Street+New+York+10282')
+            latlon = geo_loc(currLoc.replace(',',' ').replace(' ','+'))
+            lat = latlon['lat']
+            lon = latlon['lng']
+            coords.append([currLoc,lat,lon])
+    return [lat,lon,coords]
+
 
 
 key = 'AIzaSyC-MUmJ4HXQBGP_je0df7IpbQWY-cYGS3I'
