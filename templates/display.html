@@ -1,0 +1,29 @@
+
+<script src = "static/js/jquery.min.js"> </script>
+
+<div id = "data">blah</div>
+<body onload="getLares();">
+
+<script>
+function pulldata() {
+$.ajax("/show", {
+            type: 'POST',
+            success: function (response) {
+                
+                //console.log(response);
+                document.getElementById("data").innerHTML = response;
+                
+            }
+
+        });
+}
+    
+pulldata();
+var nIntervId;
+
+
+function getLares() {
+      nIntervId = setInterval(pulldata, 10000);
+}
+ 
+</script>
