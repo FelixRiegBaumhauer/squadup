@@ -33,16 +33,9 @@ def retSchedule(user):
     hi=c.fetchall()
     return hi
 
-def retCurrentLocation(user):
-    db=sqlite3.connect("data/users.db")
-    c=db.cursor()
-    c.execute('''SELECT location FROM users WHERE username==''' +"'" +str(user)+"'" +';')
-    return c.fetchall()
-
-
 
 '''
-This function finds users that have the same classes as another user 
+This function finds users that have the same classes as another user
 '''
 def retClassmates(user):
     db=sqlite3.connect(f)

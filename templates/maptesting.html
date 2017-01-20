@@ -1,18 +1,20 @@
-{% extends "index.html" %}
+{% extends "main.html" %}
+
+{% block content %}
 <br>
 
 
   <div class="small-6 columns">
 
 
-      <div id="map" style="width: 650px; height: 900px;"></div>
+      <div id="map" style="width: 450px; height: 500px;"></div>
 
       <script type="text/javascript">
         //var locations = {{info|safe}};
-        var locations = [['idk',40.01283213,-73.02834234]]
+        var locations = {{coords | safe}};
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: new google.maps.LatLng({{clat}}, {{clon}}),
+          zoom: 11,
+          center: new google.maps.LatLng(40.7179464, -74.0139052),
           mapTypeId: google.maps.MapTypeId.ROADMAP
         });
         var infowindow = new google.maps.InfoWindow();
@@ -34,5 +36,5 @@
         }
       </script>
 </div>
-
+ <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 {% endblock %}

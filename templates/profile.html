@@ -62,13 +62,22 @@ Friend Request Sent
 <input type="submit" value="add_friend" name="submit">
 </form>
 {% elif status == -1 %}
+<!-- <img src='{{pfp}}' height='75px' width='75px'> -->
 
 {% else %}
-Friends
+You are friends with {{name}}
 {% endif %}
 
 {% if status == -2 %}
+<h3> Upload Your Profile Picture </h3>
+
+<form method="POST" action="/uploadPFP" enctype="multipart/form-data">
+    <input type="file" name="file" id="file">
+<input type="submit" value="upload" name="submit">
+</form>
+
 <h3>Upload Your Schedule</h3>
+
 <form method="POST" action="/upload" enctype="multipart/form-data">
     <input type="file" name="file" id="file">
 <input type="submit" value="upload" name="submit">
@@ -115,7 +124,7 @@ Post Your Schedule
 
 </div>
 <h2>
-{{name}}'s Schedule<br>
+<img src='{{pfp}}' height='75px' width='75px'> {{name}}'s Schedule 
 </h2>
 <ul>
 {% for pd,class in sch[:] %}

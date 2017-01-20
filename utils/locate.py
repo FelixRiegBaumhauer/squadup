@@ -1,6 +1,6 @@
 #THIS IS WHERE THE LOCATION FXNS AND SO ON WILL GO
 
-import sqlite3
+import sqlite3, urllib, urllib2, json
 from time import gmtime, localtime, strftime
 
 #the db location
@@ -32,7 +32,32 @@ def updateLoc(loc, user):
 
     showtime = strftime("%Y-%m-%d %H:%M:%S", localtime())[6:-3]
     c.execute('UPDATE users SET time = "' + showtime +'" WHERE username="' + user+ '";')
-    
+
     db.commit()
     db.close()
     return 0
+
+
+def retCurrentLocation(user):
+    db=sqlite3.connect("data/users.db")
+    c=db.cursor()
+    c.execute('''SELECT location FROM users WHERE username==''' +"'" +str(user)+"'" +';')
+    return c.fetchall()
+
+
+key = 'AIzaSyC-MUmJ4HXQBGP_je0df7IpbQWY-cYGS3I'
+def geo_loc(location):
+#finds the longitude and latitude of a given location parameter using Google's Geocode API
+#return format is a dictionary with longitude and latitude as keys
+        loc = urllib.quote_plus(location)
+        googleurl = "https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s" % (loc,key)
+        request = urllib2.urlopen(googleurl)
+        results = request.read()
+        gd = json.loads(results) #dictionary
+        if gd['status'] != "OK":
+                return location+" is a bogus location! What are you thinking?"
+        else:
+                result_dic = gd['results'][0] #dictionary which is the first element in the results list
+                geometry = result_dic['geometry'] #geometry is another dictionary
+                loc = geometry['location'] #yet another dictionary
+                return loc

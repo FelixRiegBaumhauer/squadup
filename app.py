@@ -37,7 +37,7 @@ def main():
             feed = utils.locate.retUsers()
             feed = sorted(feed, key=lambda x: x[4], reverse=True) # sort users by time updated
 
-            if utils.schedule.retCurrentLocation(session[secret])[0][0].isdigit(): #check if current location is in skool (a room #)
+            if utils.locate.retCurrentLocation(session[secret])[0][0].isdigit(): #check if current location is in skool (a room #)
                 leave=False
                 pd = utils.schedule.getPeriod(session[secret])
                 utils.locate.updateLoc(str(pd), session[secret])
@@ -141,7 +141,7 @@ def dispProfile():
 
     L = [] #instantiate vars
     sched = (utils.schedule.retSchedule(session[secret]))
-    loc = (utils.schedule.retCurrentLocation(session[secret]))
+    loc = (utils.locate.retCurrentLocation(session[secret]))
     classmates = (utils.schedule.retClassmates(session[secret]))
     try:
         loc = loc[0][0]
@@ -160,7 +160,7 @@ def dispProfile():
             status = -2
             return render_template("profile.html", username=session[secret], sch=L[1:], own=True, name=session[secret],location = loc,status=status)
     status = -1
-    return render_template("profile.html", username=session[secret], sch=zip(L[1:], classmates), own=True, name=session[secret],location = loc,status=status)
+    return render_template("profile.html", username=session[secret], sch=zip(L[1:], classmates), own=True, name=session[secret],location = loc,status=status, pfp='./static/images/'+session[secret]+'.png')
 
 
 '''
@@ -180,7 +180,7 @@ def dispFriendProfile(query):
         if request.form["submit"]=="search":
             q = request.form['search']
             return redirect("/profile/" + q)
-    loc = (utils.schedule.retCurrentLocation(query))
+    loc = (utils.locate.retCurrentLocation(query))
     try:
         loc = loc[0][0]
     except:
@@ -247,8 +247,6 @@ def process(box):
     if box == 'names':
         # do some stuff to open your names text file
         # do some other stuff to filter
-        # put suggestions in this format...
-        #suggestions = [{'value': 'joe'}, {'value': 'jim'}]
         return jsonify({"suggestions":suggestions})
 
 
@@ -271,41 +269,72 @@ def uploaded_file(filename):
 
 '''
 used by the upload functionallity
+
 '''
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method=='GET':
         return render_template('upload.html')
     else:
-        # check if the post request has the file part
         if 'file' not in request.files:
             return 'No file part'
         file = request.files['file']
-        # if user does not select file, browser also
-        # submit a empty part without filename
         if file.filename == '':
             flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
             info = idek(filename)
+            os.remove(UPLOAD_FOLDER + filename) # remove file after parsing imge
             pd = info[0].split()[1:]
             rooms = info[1].split()
             rooms = rooms[1:]
-            #print rooms
             x=1
             while(x<11):
-                #print x
                 if str(x) not in pd:
                     rooms.insert(x,'free')
                 x+=1
             utils.schedule.createSchedule(rooms[1:],session[secret])
             return redirect(url_for('main'))
 
-            return redirect(url_for('uploaded_file',
-                                    filename=filename))
+@app.route('/uploadPFP', methods=['GET', 'POST'])
+def upload_PFP():
+    if request.method=='GET':
+        return render_template('upload.html')
+    else:
+        if 'file' not in request.files:
+            return 'No file part'
+        file = request.files['file']
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+            try:
+                os.rename(UPLOAD_FOLDER + filename, UPLOAD_FOLDER+session[secret]+'.png')
+            except:
+                os.remove(UPLOAD_FOLDER + session[secret]+'.png')
+                os.rename(UPLOAD_FOLDER + filename, UPLOAD_FOLDER+session[secret]+'.png')
+            return redirect(url_for('main'))
 
+@app.route('/maptesting')
+def maptesting():
+    friends = utils.search.retFriends(session[secret])[0]
+    coords = []
+    lat=''
+    lon=''
+    for f in friends:
+        currLoc = str(utils.locate.retCurrentLocation(f)[0][0])
+        print currLoc
+        if len(currLoc) > 4:
+            #print utils.locate.geo_loc('345+Chambers+Street+New+York+10282')
+            latlon = utils.locate.geo_loc(currLoc.replace(',',' ').replace(' ','+'))
+            lat = latlon['lat']
+            lon = latlon['lng']
+            coords.append([currLoc,lat,lon])
+    return render_template("maptesting.html",lat=lat,lon=lon, coords=coords)
 
 '''
 DEBUG and RUN
