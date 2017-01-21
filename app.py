@@ -44,7 +44,7 @@ def main():
             else:
                 leave=True
             #return redirect('display')
-            mapDeets = utils.locate.maptesting(session[secret])
+            mapDeets = utils.locate.maptesting(session[secret],0)
             info = []
             #friends = utils.search.retFriends(session[secret])[0]
             for f in feed:
@@ -342,6 +342,15 @@ def upload_PFP():
                 os.remove(UPLOAD_FOLDER + session[secret]+'.png')
                 os.rename(UPLOAD_FOLDER + filename, UPLOAD_FOLDER+session[secret]+'.png')
             return redirect(url_for('main'))
+
+@app.route('/geo')
+def geo():
+
+    tmpcoords = utils.locate.maptesting(session[secret],1)[2]
+    realcoords = []
+    for t in tmpcoords:
+        realcoords.append(str(t[1]) +',' + str(t[2]))
+    return render_template("geoguesser.html", coord=realcoords)
 
 '''
 DEBUG and RUN

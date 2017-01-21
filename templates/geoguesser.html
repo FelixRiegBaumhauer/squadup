@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <link rel='stylesheet' href='/static/css/map.css' />
+  <link rel='stylesheet' href='/static/css/style.css' />
+  <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'></script>
+  <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCZOXlIZdfYBcn_W8UrY-JYrE3eueQq4_k&sensor=false&libraries=geometry'></script>
+  <script type='text/javascript' src='/static/js/rnd.js'></script>
+  <script type='text/javascript' src='/static/js/minimap.js'></script>
+  <script type='text/javascript' src='/static/js/roundmap.js'></script>
+  <script type='text/javascript' src='/static/js/app.js'></script>
+</head>
+
+<body>
+  <div id='content'>
+    <div id="roundEnd"></div>
+    <div id="endGame"></div>
+    <div id='scoreBoard'>
+      <span class='round'>Current Round: <b>1/5</b></span><br/>
+      <span class='roundScore'>Last Round Score: <b>0</b></span><br/>
+      <span class='totalScore'>Total Score: <b>0</b></span>
+    </div>
+    <div id='miniMap'></div>
+    <div id='timer'></div>
+    <div id='guessButton' class="btn btn-large btn-danger"> Guess Here</div>
+    <div id='pano'></div>
+  </div>
+</body>
+
+<script type="text/javascript">
+//
+// Streetview Map
+//
+
+function svinitialize() {
+
+  console.log('hi');
+
+var coordArray = {{coord | safe}}
+var randCoord = coordArray[Math.floor(Math.random() * coordArray.length)];
+coordArrayLatLongs = randCoord.replace(/[\])}[{(]/g,'').split(',');
+
+  window.locLL = coordArrayLatLongs[0]+","+coordArrayLatLongs[1];
+  var whoamiLocation = new google.maps.LatLng(coordArrayLatLongs[0],coordArrayLatLongs[1]);
+  var streetViewService = new google.maps.StreetViewService();
+  var STREETVIEW_MAX_DISTANCE = 100;
+
+  streetViewService.getPanoramaByLocation(whoamiLocation, STREETVIEW_MAX_DISTANCE, function (streetViewPanoramaData, status) {
+      if (status === google.maps.StreetViewStatus.OK) {
+        var panoramaOptions = {
+          position: whoamiLocation,
+          addressControl: false,
+          linksControl: false,
+          pov: {
+            heading: 270,
+            zoom: 1,
+            pitch: -10
+          },
+          visible: true
+        };
+        var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions);
+
+      } else {
+          alert('Streetview is not available for this location');
+      }
+  });
+
+};
+</script>
+</html>

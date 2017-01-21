@@ -106,3 +106,6 @@ made formatting of classmates nicer with tables, main page now shows friends ins
 
 kathyL -- 2017-01-21 13:57
 minor fix to logout fxn, new signup page, img sliding on front page
+
+kathyL -- 2017-01-21 15:09
+added geo guesser game, but will commit to unstable branch first
