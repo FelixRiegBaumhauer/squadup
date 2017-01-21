@@ -23,6 +23,19 @@ def retAllUsers():
     c.execute('SELECT * FROM users;')
     return c.fetchall()[::-1]
 
+def retAllFriends(q):
+    db=sqlite3.connect(f)
+    c=db.cursor()
+    fList = utils.search.retFriends(q)[0]
+    retList = []
+    for fr in fList:
+        c.execute('SELECT * FROM users WHERE time != "" AND username =="' + fr + '";')
+        try:
+            retList.append(c.fetchall()[0])
+        except:
+            pass
+    return retList
+
 #the function that updates the entry in the db that correspondes to the users location
 #simplly said it is the backend fxn that updates loactions
 def updateLoc(loc, user):

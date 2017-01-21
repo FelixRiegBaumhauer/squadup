@@ -89,6 +89,5 @@ def getPeriod(user):
                 return sched[0][i+1]
             else:
                 return "outside of school"
-            #return i+1
         i+=1
     return "outside of school"

@@ -34,7 +34,7 @@ def main():
     if(secret in session):
         if request.method=="GET":
 
-            feed = utils.locate.retUsers()
+            feed = utils.locate.retAllFriends(session[secret])
             feed = sorted(feed, key=lambda x: x[4], reverse=True) # sort users by time updated
 
             if utils.locate.retCurrentLocation(session[secret])[0][0].isdigit(): #check if current location is in skool (a room #)
@@ -95,7 +95,7 @@ def display():
 
 @app.route("/show",methods=['GET', 'POST'])
 def printit():
-        feed = utils.locate.retUsers()
+        feed = utils.locate.retAllFriends(session[secret])
         feed = sorted(feed, key=lambda x: x[4], reverse=True) # sort users by time updated
         return render_template('newsfeed.html',news=feed)
 

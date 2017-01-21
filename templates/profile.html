@@ -124,17 +124,20 @@ Post Your Schedule
 
 </div>
 <h2>
-<img src='{{pfp}}' height='75px' width='75px'> {{name}}'s Schedule 
+<img src='{{pfp}}' height='75px' width='75px'> {{name}}'s Schedule
 </h2>
-<ul>
+
+  <table width="200" class="alt">
+    <tr style="background-color: #c6f8ff"> <td> <strong> Period  </strong></td> <td> <strong> Classmates  </strong></td></tr>
 {% for pd,class in sch[:] %}
-    <li>{{ pd }}<br>
-      {% for ppl in class %}
+    <tr >
+      <td> {{ pd }}</td>
+    <td> {% for ppl in class %}
       {{ ppl }},
-      {% endfor %}
-    </li>
+      {% endfor %} </td>
+    </tr>
 {% endfor %}
-</ul>
+</table>
 
 {% elif status == 2%}
 

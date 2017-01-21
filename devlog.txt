@@ -100,3 +100,6 @@ could not install pytesser correctly on digital ocean despite multiple tries. sa
 
 kathyL -- 2017-01-19 23:29
 added profile pics functionality -- every image will be named after the user -- when the user adds a new image it replaces the old one. show where friends are on map. show all images of friends on map based on current location! tried to incorporate sachal's ajax but commited to different branch bc unstableness w merge
+
+kathyL -- 2017-01-20 22:26
+made formatting of classmates nicer with tables, main page now shows friends instead of all users
