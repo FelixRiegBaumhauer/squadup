@@ -110,7 +110,8 @@ The logout route, pops your session, and takes you out of the site
 @app.route("/logout/")
 def log_user_out():
     print session
-    session.pop(secret)
+    if secret in session:
+        session.pop(secret)
     #return redirect(url_for('main'))
     return render_template("login.html")##THIS IS A QUICK FIX
 ##THIS SHOULD BE FIXED IN THE FUTURE

@@ -103,3 +103,6 @@ added profile pics functionality -- every image will be named after the user -- 
 
 kathyL -- 2017-01-20 22:26
 made formatting of classmates nicer with tables, main page now shows friends instead of all users
+
+kathyL -- 2017-01-21 13:57
+minor fix to logout fxn, new signup page, img sliding on front page
