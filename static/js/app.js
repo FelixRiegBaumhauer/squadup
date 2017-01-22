@@ -56,7 +56,7 @@
 
     // Reset Timer
     function resetTimer(){
-      count = 10;
+      count = 15;
       counter = setInterval(timer, 1000);
     }
 
@@ -180,7 +180,7 @@
       totalScore = totalScore + points;
 
       $('#miniMap, #pano, #guessButton, #scoreBoard').hide();
-      $('#endGame').html('<h1>Congrats!</h1><h2>Your final score was:</h2><h1>'+totalScore+'!</h1><br/><button class="btn btn-large btn-success playAgain" type="button">Play Again?</button>');
+      $('#endGame').html('<h1>Congrats!</h1><h2>Your final score was:</h2><h1>'+totalScore+'!</h1><br/><button class="btn btn-large btn-success playAgain" type="button">Play Again?</button><br><br><a href="/">End Game </a>' );
       $('#endGame').fadeIn(500);
 
       rminitialize();

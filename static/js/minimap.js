@@ -10,7 +10,7 @@ function mminitialize() {
   var mapOptions = {
     center: new google.maps.LatLng(0, 0, true),
     center: new google.maps.LatLng(40.7179464, -74.0139052),
-    zoom: 15,
+    zoom: 12,
     mapTypeControl: false,
     streetViewControl: false,
     mapTypeId: google.maps.MapTypeId.ROADMAP

@@ -49,14 +49,11 @@ def main():
             #friends = utils.search.retFriends(session[secret])[0]
             for f in feed:
                 f = f[1]
-                print f
                 file_path = './static/images/' + str(f) + '.png'
-                #print file_path
                 if os.path.exists(file_path):
                     info.append(file_path)
                 else:
                     info.append('./static/images/default.png')
-            #print info
             return render_template('main.html',username=session[secret],news=feed2,leave=leave, lat=mapDeets[0], lon = mapDeets[1], coords=mapDeets[2], pfp=info)
         else:
             if request.form["submit"]=="post":
