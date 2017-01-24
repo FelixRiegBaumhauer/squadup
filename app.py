@@ -4,7 +4,7 @@
 
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash, jsonify
 
-import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate, utils.img2text, utils.display
+import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate, utils.img2text, utils.messages
 
 from werkzeug.utils import secure_filename
 
@@ -270,10 +270,24 @@ def process(box):
         # do some other stuff to filter
         return jsonify({"suggestions":suggestions})
 
+'''messaging page'''
+@app.route("/messages")
+def messages():
+    searchFriends = utils.search.retFriends(session[secret])
+    friends = searchFriends[0]
+    return render_template('messages.html', friends=friends)
+
+'''messaging page'''
+@app.route("/messages/<user>", methods=['GET', 'POST'])
+def messagesfriends(user):
+    feed = utils.messages.retMessages(session[secret], user)
+    feed = sorted(feed, key=lambda x: x[3], reverse=True) # sort users by time updated
+    return render_template('msgfeed.html',news=feed, friend=user)
+
+
 
 '''
 This is used by the until now not in use file upload functionallity
-SHOULD BE MOVED TO THE utils folder
 '''
 def allowed_file(filename):
     return '.' in filename and \
@@ -290,7 +304,7 @@ def uploaded_file(filename):
 
 '''
 used by the upload functionallity
-
+for schedules
 '''
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
@@ -318,6 +332,9 @@ def upload_file():
                 x+=1
             utils.schedule.createSchedule(rooms[1:],session[secret])
             return redirect(url_for('main'))
+
+
+'''for profile pictures'''
 
 @app.route('/uploadPFP', methods=['GET', 'POST'])
 def upload_PFP():

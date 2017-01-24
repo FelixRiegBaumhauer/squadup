@@ -56,7 +56,7 @@
 					</li>
 				<li><a href="/profile"><i class="glyphicon glyphicon-user"></i>{{username}}</a></li> |
 				<li><a href="/"> Home </a></li>
-			<li><a href="#"></i> Message</a></li>
+			<li><a href="/messages"></i> Message</a></li>
 			<li><a href="/friends"></i> Friends</a></li>
                       </ul>
         </div>
@@ -159,15 +159,6 @@
 
 </div>
 <!-- /Main -->
-	  {% endblock %}
-<footer class="text-center"></footer>
-
-
-
-<p1>
-  <form action="/logout">
-    <input type="submit" value="logout" />
-</p1>
 
     <script>
 function pulldata() {
@@ -192,6 +183,15 @@ function getLares() {
 }
 
 </script>
+{% endblock %}
+<footer class="text-center"></footer>
+
+
+
+<p1>
+<form action="/logout">
+<input type="submit" value="logout" />
+</p1>
 
 
 
