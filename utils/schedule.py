@@ -29,7 +29,7 @@ def createSchedule(schedule, userID):
 def retSchedule(user):
     db=sqlite3.connect(f)
     c=db.cursor()
-    c.execute('''SELECT * FROM schedule WHERE userID==''' +"'" +str(user)+"'" +';')
+    c.execute('''SELECT * FROM schedule WHERE userID==''' +"'" +user+"'" +';')
     hi=c.fetchall()
     return hi
 

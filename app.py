@@ -162,8 +162,8 @@ def dispProfile():
 
     L = [] #instantiate vars
     sched = (utils.schedule.retSchedule(session[secret]))
-    loc = (utils.locate.retCurrentLocation(session[secret]))
     classmates = (utils.schedule.retClassmates(session[secret]))
+    loc = (utils.locate.retCurrentLocation(session[secret]))
     try:
         loc = loc[0][0]
     except:

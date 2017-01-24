@@ -29,7 +29,7 @@ def retAllFriends(q):
     fList = utils.search.retFriends(q)[0]
     retList = []
     for fr in fList:
-        c.execute('SELECT * FROM users WHERE time != "" AND username =="' + fr + '";')
+        c.execute('SELECT * FROM users WHERE username =="' + fr + '";')
         try:
             retList.append(c.fetchall()[0])
         except:
@@ -79,7 +79,9 @@ def maptesting(user, t):
                 lon = latlon['lng']
                 coords.append([currLoc,lat,lon])
             else:
-                coords.append(['Stuyvesant High School', 40.7179464, -74.0139052])
+                place = utils.schedule.getPeriod(f[1])
+                updateLoc(str(place), f[1])
+                coords.append(['Stuyvesant', 40.7179464, -74.0139052])
         else:
             currLoc = f[3]
             if len(currLoc) > 4:
