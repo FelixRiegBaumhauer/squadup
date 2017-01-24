@@ -115,3 +115,6 @@ added geo guesser game, made changes to locate coords function in utils
 
 kathyL --2017-01-24 12:07
 debug and make friends autoupdate location if in school
+
+kathyL --2017-01-24 17:34
+remove unnecessary extra file and put in keys file that should be removed later

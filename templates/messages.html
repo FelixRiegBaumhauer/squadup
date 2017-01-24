@@ -1,0 +1,54 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<h2> Messages </h2>
+
+<div class="container-fluid">
+    <div class="row">
+
+
+<div class="col-sm-2" ><ul>
+{% for a in friends %}
+<li><a href="/messages/{{a}}"> {{a}} </a>
+</li>
+{% endfor %}
+</ul>
+</div>
+
+<div class="col-sm-5 col-sm-push-1" ><ul>
+<div id="msgfeed"
+
+</div>
+
+
+</div>
+</div>
+
+<br>
+
+    <script>
+function pullmsgs() {
+$.ajax("/messages/" + {{friend}}, {
+            type: 'POST',
+            success: function (response) {
+
+                console.log("working");
+                document.getElementById("msgfeed").innerHTML = response;
+
+            }
+
+        });
+}
+
+pullmsgs();
+var nIntervId;
+
+
+function getMsgs() {
+      nIntervId = setInterval(pulldata, 1/60.);
+}
+
+</script>
+
+{% endblock %}

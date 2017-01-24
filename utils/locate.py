@@ -1,6 +1,6 @@
 #THIS IS WHERE THE LOCATION FXNS AND SO ON WILL GO
 
-import sqlite3, urllib, urllib2, json, utils.search, random
+import sqlite3, urllib, urllib2, json, utils.search, random, key
 from time import gmtime, localtime, strftime
 
 #the db location
@@ -95,7 +95,8 @@ def maptesting(user, t):
     return [lat,lon,coords]
 
 
-key = 'AIzaSyC-MUmJ4HXQBGP_je0df7IpbQWY-cYGS3I'
+key = key.getMapsKey()
+
 def geo_loc(location):
 #finds the longitude and latitude of a given location parameter using Google's Geocode API
 #return format is a dictionary with longitude and latitude as keys

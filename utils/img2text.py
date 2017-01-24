@@ -1,7 +1,9 @@
 import requests
+import key
 
+key = key.getImgKey()
 
-def ocr_space_file(filename, overlay=True, api_key='a4d3e0647588957', language='eng'):
+def ocr_space_file(filename, overlay=True, api_key=key, language='eng'):
     """ OCR.space API request with local file.
         Python3.5 - not tested on 2.7
     :param filename: Your file path & name.
@@ -16,7 +18,7 @@ def ocr_space_file(filename, overlay=True, api_key='a4d3e0647588957', language='
     """
 
     payload = {'isOverlayRequired': overlay,
-               'apikey': 'a4d3e0647588957',
+               'apikey': key,
                'language': language,
                }
     with open(filename, 'rb') as f:
@@ -27,7 +29,7 @@ def ocr_space_file(filename, overlay=True, api_key='a4d3e0647588957', language='
     return r.content.decode()
 
 
-def ocr_space_url(url, overlay=False, api_key='a4d3e0647588957', language='eng'):
+def ocr_space_url(url, overlay=False, api_key=key, language='eng'):
     """ OCR.space API request with remote file.
         Python3.5 - not tested on 2.7
     :param url: Image url.
@@ -43,7 +45,7 @@ def ocr_space_url(url, overlay=False, api_key='a4d3e0647588957', language='eng')
 
     payload = {'url': url,
                'isOverlayRequired': overlay,
-               'apikey': 'a4d3e0647588957',
+               'apikey': key,
                'language': language,
                }
     r = requests.post('https://api.ocr.space/parse/image',
@@ -57,4 +59,3 @@ def ocr_space_url(url, overlay=False, api_key='a4d3e0647588957', language='eng')
 #url = ocr_space_file(filename='/static/images/bportal.png', language='eng')#['ParsedResults'][0]#['ParsedText']
 #url = url[url.find('ParsedText')+13:url.find('"ErrorMessage')-1]
 #url=url.replace("\r\n", "\n").replace("\r", "\n")
-
