@@ -109,3 +109,6 @@ minor fix to logout fxn, new signup page, img sliding on front page
 
 kathyL -- 2017-01-21 15:09
 added geo guesser game, made changes to locate coords function in utils
+
+kathyL --2017-01-24 12:07
+debug and make friends autoupdate location if in school
