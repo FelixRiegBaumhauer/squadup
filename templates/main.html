@@ -79,7 +79,7 @@
 <div class="container-fluid">
     <div class="row">
 
-
+<div id = "calls"> calls here</div>
 			<div class="col-sm-5 col-sm-push-1" >
 
 						  {% block content %}
@@ -191,6 +191,33 @@ $.ajax("/show", {
             }
 
         });
+    
+    
+$.ajax("/displayCalls", {
+            type: 'POST',
+            success: function (response) {
+                console.log("h" + response + "h");
+                console.log("working");
+                if (response == "") {
+                    document.getElementById("calls").innerHTML = "<center> NO INCOMING CALLS </center>"
+                }
+                else {
+                document.getElementById("calls").innerHTML = "<center> you have a call from, " + response + " <a href = 'twilio?name=" + "{{username}}" + "'>join </a> | <a onclick = 'rejectcall()'> reject </a> </center>";
+                }
+                
+            }
+
+        });
+}
+        
+function rejectcall() {
+            
+        $.ajax('/deleteCalls', {
+                        data: { calling : ""},
+                        type: 'POST'
+            });
+        alert("you rejected the call");
+    
 }
     
 pulldata();

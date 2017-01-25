@@ -50,7 +50,6 @@
 <input type="submit" value="edit" name="submit">
 </form>
 {% endif %}
-
 {% if status == 0 %}
 Friend Request Sent
 {% elif status == 3 %}
@@ -66,6 +65,8 @@ Friend Request Sent
 
 {% else %}
 You are friends with {{name}}
+<div id = "make call"> <a href = "/twilio?name={{ name }}">CALL THUS USER</a></div>
+
 {% endif %}
 
 {% if status == -2 %}

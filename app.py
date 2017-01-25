@@ -4,17 +4,24 @@
 
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash, jsonify
 
-import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate, utils.img2text, utils.display
+import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate, utils.img2text, utils.display, utils.addcall
 
 from werkzeug.utils import secure_filename
 
 from time import gmtime, strftime
+
+from faker import Factory
+from twilio.access_token import AccessToken, VideoGrant
+from dotenv import load_dotenv, find_dotenv
 
 
 
 
 
 app = Flask(__name__)
+fake = Factory.create()
+load_dotenv(find_dotenv())
+
 
 app.secret_key = 'idk'#os.urandom(32)
 secret=""
@@ -69,6 +76,33 @@ def main():
     return render_template("login.html")
 
 
+@app.route('/twilio')
+def twilio():
+    return render_template('twilio.html')
+
+
+@app.route('/token', methods=["GET","POST"])
+def token():
+    # get credentials for environment variables
+    account_sid = 'ACd9b72d3e2fd1c7afee885f62d2d95a95'
+    api_key = 'SK3a1be8585f189c540584a1757e10ba69'
+    api_secret = 'aNovO6gcHsTOUjByHkUruUHyhq1Aserx'
+    
+    # Create an Access Token
+    token = AccessToken(account_sid, api_key, api_secret)
+
+    # Set the Identity of this token
+    token.identity = session[secret]
+    
+    # Grant access to Video
+    grant = VideoGrant()
+    grant.configuration_profile_sid = 'VSa37a06ac2dac126260d6675aae39566f'
+    token.add_grant(grant)
+
+    # Return token info as JSON
+    return jsonify(identity=token.identity, token=token.to_jwt())
+
+
 '''
 the login route, makes sure that your entered info can be checked so you can be let in
 '''
@@ -112,6 +146,10 @@ def log_user_out():
 ##THIS SHOULD BE FIXED IN THE FUTURE
 
 
+@app.route("/addcall",methods=['GET', 'POST'])
+def addcall():
+    utils.addcall.addCall(request.form['calling'] ,session[secret])
+    return 'hi'
 
 
 '''
@@ -162,6 +200,7 @@ def dispProfile():
     sched = (utils.schedule.retSchedule(session[secret]))
     loc = (utils.locate.retCurrentLocation(session[secret]))
     classmates = (utils.schedule.retClassmates(session[secret]))
+    calls = utils.addcall.retCalls(session[secret])
     try:
         loc = loc[0][0]
     except:
@@ -177,11 +216,22 @@ def dispProfile():
             return redirect("/profile/" + q)
         if request.form["submit"]=="edit":
             status = -2
-            return render_template("profile.html", username=session[secret], sch=L[1:], own=True, name=session[secret],location = loc,status=status, pfp='./static/images/'+session[secret]+'.png')
+            return render_template("profile.html", username=session[secret], sch=L[1:], own=True, name=session[secret],location = loc,status=status, pfp='./static/images/'+session[secret]+'.png', calls = calls)
     status = -1
-    return render_template("profile.html", username=session[secret], sch=zip(L[1:], classmates), own=True, name=session[secret],location = loc,status=status, pfp='./static/images/'+session[secret]+'.png')
+    return render_template("profile.html", username=session[secret], sch=zip(L[1:], classmates), own=True, name=session[secret],location = loc,status=status, pfp='./static/images/'+session[secret]+'.png', calls = calls)
 
 
+@app.route('/displayCalls', methods=['POST','GET'])
+def displayCalls():
+    calls = utils.addcall.retCalls(session[secret])
+    return calls
+
+@app.route('/deleteCalls', methods=['POST','GET'])
+def deleteCalls():
+    calls = utils.addcall.deleteCall(session[secret])
+    return calls
+    
+    
 '''
 This is the route used by the search functions
 If you search, the serached users profile is shown by means of this method
