@@ -4,13 +4,8 @@
 
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash, jsonify
 
-<<<<<<< HEAD
-import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate, utils.img2text, utils.display, utils.addcall
-=======
+import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate, utils.img2text, utils.addcall,utils.messages
 
-import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate, utils.img2text, utils.messages
-
->>>>>>> de9cdd724c2ed8f00b4c55bf5ae1d3a629e7030a
 
 from werkzeug.utils import secure_filename
 
@@ -143,7 +138,6 @@ def printit():
 '''
 The logout route, pops your session, and takes you out of the site
 '''
-@app.route("/logout")
 @app.route("/logout/")
 def log_user_out():
     print session
@@ -207,11 +201,8 @@ def dispProfile():
     L = [] #instantiate vars
     sched = (utils.schedule.retSchedule(session[secret]))
     classmates = (utils.schedule.retClassmates(session[secret]))
-<<<<<<< HEAD
     calls = utils.addcall.retCalls(session[secret])
-=======
     loc = (utils.locate.retCurrentLocation(session[secret]))
->>>>>>> de9cdd724c2ed8f00b4c55bf5ae1d3a629e7030a
     try:
         loc = loc[0][0]
     except:
