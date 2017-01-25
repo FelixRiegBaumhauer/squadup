@@ -9,7 +9,7 @@ f="data/users.db"
 f2 = open('keys.txt')
 f2 = f2.readlines()
 
-key = f[0]
+key = f2[0]
 
 #return users who have a current location
 def retUsers():
