@@ -8,11 +8,11 @@ Link to a demonstaration of the project: ------------------PUT A LINK HERE------
 
 Nessecary Packages:
 
-Requests: to utilize pip install "$ pip install requests"
 
-to get all packages: pip install -r requirements.txt
+to get all requried packages: pip install -r requirements.txt
 
 included packages are
+requests
 twilio==5.6.0
 fake-factory==0.5.3
 python-dotenv==0.6.0

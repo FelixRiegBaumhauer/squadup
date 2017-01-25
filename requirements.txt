@@ -1,3 +1,4 @@
+requests 
 twilio==5.6.0
 fake-factory==0.5.3
 python-dotenv==0.6.0
