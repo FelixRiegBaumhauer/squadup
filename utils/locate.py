@@ -1,6 +1,6 @@
 #THIS IS WHERE THE LOCATION FXNS AND SO ON WILL GO
 
-import sqlite3, urllib, urllib2, json, utils.search, random, key
+import sqlite3, urllib, urllib2, json, utils.search, random
 from time import gmtime, localtime, strftime
 
 #the db location
