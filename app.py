@@ -4,7 +4,13 @@
 
 from flask import Flask, render_template, request, session, redirect, url_for, send_from_directory, flash, jsonify
 
+<<<<<<< HEAD
 import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate, utils.img2text, utils.display, utils.addcall
+=======
+
+import json, os, urllib, hashlib, utils.auth, utils.schedule, utils.search, utils.locate, utils.img2text, utils.messages
+
+>>>>>>> de9cdd724c2ed8f00b4c55bf5ae1d3a629e7030a
 
 from werkzeug.utils import secure_filename
 
@@ -41,8 +47,8 @@ def main():
     if(secret in session):
         if request.method=="GET":
 
-            feed = utils.locate.retUsers()
-            feed = sorted(feed, key=lambda x: x[4], reverse=True) # sort users by time updated
+            feed = utils.locate.retAllFriends(session[secret])
+            feed2 = sorted(feed, key=lambda x: x[4], reverse=True) # sort users by time updated
 
             if utils.locate.retCurrentLocation(session[secret])[0][0].isdigit(): #check if current location is in skool (a room #)
                 leave=False
@@ -51,16 +57,17 @@ def main():
             else:
                 leave=True
             #return redirect('display')
-            mapDeets = utils.locate.maptesting(session[secret])
+            mapDeets = utils.locate.maptesting(session[secret],0)
             info = []
-            friends = utils.search.retFriends(session[secret])[0]
-            for f in friends:
+            #friends = utils.search.retFriends(session[secret])[0]
+            for f in feed:
+                f = f[1]
                 file_path = './static/images/' + str(f) + '.png'
-                print file_path
                 if os.path.exists(file_path):
                     info.append(file_path)
-            print info
-            return render_template('main.html',username=session[secret],news=feed,leave=leave, lat=mapDeets[0], lon = mapDeets[1], coords=mapDeets[2], pfp=info)
+                else:
+                    info.append('./static/images/default.png')
+            return render_template('main.html',username=session[secret],news=feed2,leave=leave, lat=mapDeets[0], lon = mapDeets[1], coords=mapDeets[2], pfp=info)
         else:
             if request.form["submit"]=="post":
                 utils.locate.updateLoc(request.form["location"], session[secret])
@@ -129,7 +136,7 @@ def display():
 
 @app.route("/show",methods=['GET', 'POST'])
 def printit():
-        feed = utils.locate.retUsers()
+        feed = utils.locate.retAllFriends(session[secret])
         feed = sorted(feed, key=lambda x: x[4], reverse=True) # sort users by time updated
         return render_template('newsfeed.html',news=feed)
 
@@ -140,7 +147,8 @@ The logout route, pops your session, and takes you out of the site
 @app.route("/logout/")
 def log_user_out():
     print session
-    session.pop(secret)
+    if secret in session:
+        session.pop(secret)
     #return redirect(url_for('main'))
     return render_template("login.html")##THIS IS A QUICK FIX
 ##THIS SHOULD BE FIXED IN THE FUTURE
@@ -198,9 +206,12 @@ def dispProfile():
 
     L = [] #instantiate vars
     sched = (utils.schedule.retSchedule(session[secret]))
-    loc = (utils.locate.retCurrentLocation(session[secret]))
     classmates = (utils.schedule.retClassmates(session[secret]))
+<<<<<<< HEAD
     calls = utils.addcall.retCalls(session[secret])
+=======
+    loc = (utils.locate.retCurrentLocation(session[secret]))
+>>>>>>> de9cdd724c2ed8f00b4c55bf5ae1d3a629e7030a
     try:
         loc = loc[0][0]
     except:
@@ -318,10 +329,36 @@ def process(box):
         # do some other stuff to filter
         return jsonify({"suggestions":suggestions})
 
+'''messaging page'''
+@app.route("/messages")
+def messages():
+    searchFriends = utils.search.retFriends(session[secret])
+    friends = searchFriends[0]
+    return render_template('messages.html', friends=friends)
+
+'''messaging page'''
+@app.route("/messages/<user>", methods=['GET', 'POST'])
+def messagesfriends(user):
+    if request.method=="POST":
+        if request.form["submit"]=="send":
+            msg = request.form["msg"]
+            utils.messages.sendmsg(session[secret], user, msg)
+            return redirect('/messages/' + user)
+    else:
+        feed = utils.messages.retMessages(session[secret], user)[-5:]
+        return render_template('messages.html',msgs=feed, friend=user,t=True)
+
+
+'''messaging page'''
+@app.route("/showmsgs/<user>", methods=['GET', 'POST'])
+def showmsgs(user):
+    feed = utils.messages.retMessages(session[secret], user)[-5:]
+    #feed = sorted(feed, key=lambda x: x[3], reverse=False) # sort users by time updated
+    return render_template('msgfeed.html',msgs=feed, friend=user)
+
 
 '''
 This is used by the until now not in use file upload functionallity
-SHOULD BE MOVED TO THE utils folder
 '''
 def allowed_file(filename):
     return '.' in filename and \
@@ -338,7 +375,7 @@ def uploaded_file(filename):
 
 '''
 used by the upload functionallity
-
+for schedules
 '''
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
@@ -367,6 +404,9 @@ def upload_file():
             utils.schedule.createSchedule(rooms[1:],session[secret])
             return redirect(url_for('main'))
 
+
+'''for profile pictures'''
+
 @app.route('/uploadPFP', methods=['GET', 'POST'])
 def upload_PFP():
     if request.method=='GET':
@@ -388,6 +428,15 @@ def upload_PFP():
                 os.rename(UPLOAD_FOLDER + filename, UPLOAD_FOLDER+session[secret]+'.png')
             return redirect(url_for('main'))
 
+@app.route('/geo')
+def geo():
+
+    tmpcoords = utils.locate.maptesting(session[secret],1)[2]
+    realcoords = []
+    for t in tmpcoords:
+        realcoords.append(str(t[1]) +',' + str(t[2]))
+    return render_template("geoguesser.html", coord=realcoords)
+
 '''
 DEBUG and RUN
 '''
@@ -395,4 +444,4 @@ DEBUG and RUN
 
 if __name__ == '__main__':
     app.debug=True
-    app.run()
+    app.run(threaded=True)

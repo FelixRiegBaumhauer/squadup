@@ -9,15 +9,15 @@ function pulldata() {
 $.ajax("/show", {
             type: 'POST',
             success: function (response) {
-                
+
                 //console.log(response);
                 document.getElementById("data").innerHTML = response;
-                
+
             }
 
         });
 }
-    
+
 pulldata();
 var nIntervId;
 
@@ -25,5 +25,5 @@ var nIntervId;
 function getLares() {
       nIntervId = setInterval(pulldata, 10000);
 }
- 
+
 </script>
