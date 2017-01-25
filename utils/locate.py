@@ -6,6 +6,10 @@ from time import gmtime, localtime, strftime
 #the db location
 f="data/users.db"
 
+f2 = open('keys.txt')
+f2 = f2.readlines()
+
+key = f[0]
 
 #return users who have a current location
 def retUsers():
@@ -93,9 +97,6 @@ def maptesting(user, t):
                 i = int(random.random() * llen)
                 coords.append(['randplace', randcoordArray[i][0], randcoordArray[i][1]])
     return [lat,lon,coords]
-
-
-key = key.getMapsKey()
 
 def geo_loc(location):
 #finds the longitude and latitude of a given location parameter using Google's Geocode API

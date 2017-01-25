@@ -1,7 +1,9 @@
 import requests
-import key
 
-key = key.getImgKey()
+f = open('keys.txt')
+f = f.readlines()
+
+key = f[1]
 
 def ocr_space_file(filename, overlay=True, api_key=key, language='eng'):
     """ OCR.space API request with local file.

@@ -118,3 +118,6 @@ debug and make friends autoupdate location if in school
 
 kathyL --2017-01-24 17:34
 remove unnecessary extra file and put in keys file that should be removed later
+
+kathyL --2017-01-24 19:54
+wrote messaging feature fxn , shows up to last 5 msgs, and might have fixed pipes problem, keys now in text file, remove later

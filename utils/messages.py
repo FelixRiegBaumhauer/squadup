@@ -21,10 +21,10 @@ def retMessages(q1, q2):
     db=sqlite3.connect(f)
     c=db.cursor()
     #c.execute("SELECT * FROM friend where user1 ==" + "'" + user +  "';")
-    c.execute("SELECT * FROM messages WHERE user1==" + "'" + q1 + "'AND user2==" + "'" + q2 +"';")
+    c.execute("SELECT * FROM messages WHERE (user1==" + "'" + q1 + "'AND user2==" + "'" + q2 + "') OR (user1==" + "'" + q2 + "'AND user2==" + "'" + q1 +"');")
     fro = c.fetchall()
-    c.execute("SELECT * FROM messages WHERE user1==" + "'" + q2 + "'AND user2==" + "'" + q1 +"';")
-    to = c.fetchall()
-    tmpL = fro + to
-    retL = sorted(tmpL, key=lambda x: x[3], reverse=True)
-    return retL
+    #c.execute("SELECT * FROM messages WHERE user1==" + "'" + q2 + "'AND user2==" + "'" + q1 +"';")
+    #to = c.fetchall()
+    tmpL = fro #+ to
+    #retL = sorted(tmpL, key=lambda x: x[3], reverse=True)
+    return tmpL
