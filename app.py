@@ -282,10 +282,23 @@ def messages():
 '''messaging page'''
 @app.route("/messages/<user>", methods=['GET', 'POST'])
 def messagesfriends(user):
-    feed = utils.messages.retMessages(session[secret], user)
-    feed = sorted(feed, key=lambda x: x[3], reverse=True) # sort users by time updated
-    return render_template('msgfeed.html',news=feed, friend=user)
+    if request.method=="POST":
+        if request.form["submit"]=="send":
+            msg = request.form["msg"]
+            utils.messages.sendmsg(session[secret], user, msg)
+            return redirect('/messages/' + user)
+    else:
+        feed = utils.messages.retMessages(session[secret], user)
+        feed = sorted(feed, key=lambda x: x[3], reverse=True) # sort users by time updated
+        return render_template('messages.html',msgs=feed, friend=user,t=True)
 
+
+'''messaging page'''
+@app.route("/showmsgs/<user>", methods=['GET', 'POST'])
+def showmsgs(user):
+    feed = utils.messages.retMessages(session[secret], user)[:]
+    feed = sorted(feed, key=lambda x: x[3], reverse=False) # sort users by time updated
+    return render_template('msgfeed.html',msgs=feed, friend=user)
 
 
 '''
