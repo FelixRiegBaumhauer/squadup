@@ -121,3 +121,7 @@ remove unnecessary extra file and put in keys file that should be removed later
 
 kathyL --2017-01-24 19:54
 wrote messaging feature fxn , shows up to last 5 msgs, and might have fixed pipes problem, keys now in text file, remove later
+
+malickS 017-01-25 12:00
+
+Created ajax implementation of allowing users to create video chats with eachother using twilio api.  Making user call, request stored in db, and then user they are calling gets updated on homepage with ajax request updating it every so often.
