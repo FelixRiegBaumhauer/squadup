@@ -10,7 +10,7 @@ Link to a demonstaration of the project: ------------------PUT A LINK HERE------
 
 
 
-Nessecary Packages:
+#Nessecary Packages:
 
 to get all requried packages: pip install -r requirements.txt
 
@@ -29,7 +29,7 @@ included packages are:
 
 
 
-Launch Instructions:
+#Launch Instructions:
 
 1. Clone or pull the nessecary repo from github
 
@@ -42,7 +42,7 @@ Launch Instructions:
 
 
 
-APIs used by the project:
+#APIs used by the project:
 
 Google maps API: used to display where users are on a map, thus allowing for better visualization of where friends are and is primarilly used in the map on the home page.
 
