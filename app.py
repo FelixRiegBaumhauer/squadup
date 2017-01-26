@@ -33,9 +33,6 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-f = open('keys.txt')
-f = f.readlines()
-
 
 '''
 The root, has to decide if it wants to redirect you to the login or if you have the appropriate cookie it will let you in
@@ -89,9 +86,9 @@ def twilio():
 @app.route('/token', methods=["GET","POST"])
 def token():
     # get credentials for environment variables
-    account_sid = f[3].strip()
-    api_key = f[4].strip()
-    api_secret = f[5].strip()
+    account_sid = 'ACd9b72d3e2fd1c7afee885f62d2d95a95'
+    api_key = 'SK3a1be8585f189c540584a1757e10ba69'
+    api_secret = 'aNovO6gcHsTOUjByHkUruUHyhq1Aserx'
 
     # Create an Access Token
     token = AccessToken(account_sid, api_key, api_secret)
@@ -101,7 +98,7 @@ def token():
 
     # Grant access to Video
     grant = VideoGrant()
-    grant.configuration_profile_sid = f[2].strip()
+    grant.configuration_profile_sid = 'VSa37a06ac2dac126260d6675aae39566f'
     token.add_grant(grant)
 
     # Return token info as JSON
@@ -397,6 +394,8 @@ def upload_file():
                 x+=1
             utils.schedule.createSchedule(rooms[1:],session[secret])
             return redirect(url_for('main'))
+        else:
+            return "Not accepted file"
 
 
 '''for profile pictures'''
@@ -421,6 +420,7 @@ def upload_PFP():
                 os.remove(UPLOAD_FOLDER + session[secret]+'.png')
                 os.rename(UPLOAD_FOLDER + filename, UPLOAD_FOLDER+session[secret]+'.png')
             return redirect(url_for('main'))
+        return "Not accepted file"
 
 @app.route('/geo')
 def geo():
