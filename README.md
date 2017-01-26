@@ -11,11 +11,15 @@ Nessecary Packages:
 
 to get all requried packages: pip install -r requirements.txt
 
-included packages are
-requests
-twilio==5.6.0
-fake-factory==0.5.3
-python-dotenv==0.6.0
+included packages are:
+
+-requests
+
+-twilio==5.6.0
+
+-fake-factory==0.5.3
+
+-python-dotenv==0.6.0
 
 
 
