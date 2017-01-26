@@ -33,6 +33,9 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+f = open('keys.txt')
+f = f.readlines()
+
 
 '''
 The root, has to decide if it wants to redirect you to the login or if you have the appropriate cookie it will let you in
@@ -86,19 +89,19 @@ def twilio():
 @app.route('/token', methods=["GET","POST"])
 def token():
     # get credentials for environment variables
-    account_sid = 'ACd9b72d3e2fd1c7afee885f62d2d95a95'
-    api_key = 'SK3a1be8585f189c540584a1757e10ba69'
-    api_secret = 'aNovO6gcHsTOUjByHkUruUHyhq1Aserx'
-    
+    account_sid = f[3]
+    api_key = f[4]
+    api_secret = f[5]
+
     # Create an Access Token
     token = AccessToken(account_sid, api_key, api_secret)
 
     # Set the Identity of this token
     token.identity = session[secret]
-    
+
     # Grant access to Video
     grant = VideoGrant()
-    grant.configuration_profile_sid = 'VSa37a06ac2dac126260d6675aae39566f'
+    grant.configuration_profile_sid = f[2]
     token.add_grant(grant)
 
     # Return token info as JSON
@@ -232,8 +235,8 @@ def displayCalls():
 def deleteCalls():
     calls = utils.addcall.deleteCall(session[secret])
     return calls
-    
-    
+
+
 '''
 This is the route used by the search functions
 If you search, the serached users profile is shown by means of this method
