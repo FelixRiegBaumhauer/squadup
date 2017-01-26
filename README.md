@@ -33,11 +33,13 @@ included packages are:
 
 1. Clone or pull the nessecary repo from github
 
-2. put keys.txt at the root of the file
+2. install the nedded packages, simpilly done by running "pip install -r requirements.txt"
 
-3. run the app "$python app.py"
+3. put keys.txt at the root of the file
 
-4. Enjoy
+4. run the app "$python app.py"
+
+5. Enjoy
 
 
 
