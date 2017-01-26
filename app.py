@@ -89,9 +89,9 @@ def twilio():
 @app.route('/token', methods=["GET","POST"])
 def token():
     # get credentials for environment variables
-    account_sid = f[3]
-    api_key = f[4]
-    api_secret = f[5]
+    account_sid = f[3].strip()
+    api_key = f[4].strip()
+    api_secret = f[5].strip()
 
     # Create an Access Token
     token = AccessToken(account_sid, api_key, api_secret)
@@ -101,7 +101,7 @@ def token():
 
     # Grant access to Video
     grant = VideoGrant()
-    grant.configuration_profile_sid = f[2]
+    grant.configuration_profile_sid = f[2].strip()
     token.add_grant(grant)
 
     # Return token info as JSON
