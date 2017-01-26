@@ -335,7 +335,7 @@ def messages():
 def messagesfriends(user):
     if request.method=="POST":
         if request.form["submit"]=="send":
-            msg = request.form["msg"]
+            msg = request.form["msg"].replace("'",",")
             utils.messages.sendmsg(session[secret], user, msg)
             return redirect('/messages/' + user)
     else:
