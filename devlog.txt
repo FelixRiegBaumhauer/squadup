@@ -127,3 +127,6 @@ Created ajax implementation of allowing users to create video chats with eachoth
 
 kathyL -- 2017-01-26 00:34
 update design doc to reflect latest changes. remove keys.txt
+
+felixR -- 2017-01-26 00:30
+Made the Video
