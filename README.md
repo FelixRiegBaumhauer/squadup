@@ -3,11 +3,14 @@
 A revolutionay and exciting new web app that seeks to encourage communication and interaction between friends and humanity in general. 
 
 
+
+
 Link to a demonstaration of the project: ------------------PUT A LINK HERE-------------
 
 
-Nessecary Packages:
 
+
+Nessecary Packages:
 
 to get all requried packages: pip install -r requirements.txt
 
@@ -25,6 +28,7 @@ included packages are:
 
 
 
+
 Launch Instructions:
 
 1. Clone or pull the nessecary repo from github
@@ -34,6 +38,8 @@ Launch Instructions:
 3. run the app "$python app.py"
 
 4. Enjoy
+
+
 
 
 APIs used by the project:
