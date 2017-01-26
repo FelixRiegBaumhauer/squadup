@@ -1,6 +1,6 @@
 #SquadUp
 
-A revolutionay and exciting new web app that seeks to encourage communication and interaction between friends and humanity in general. 
+A revolutionay and exciting new web app that seeks to encourage communication and interaction between friends and humanity in general. Users are able to see all users who have the same classes by uploading their school schedule and share their current location with their friends, which is displayed on Google Maps. On the app, they can also message their friends, video chat, and play a location based guessing game.
 
 
 
